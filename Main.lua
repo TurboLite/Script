@@ -90,7 +90,7 @@ local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboL
 
 local Window = Fluent:CreateWindow({
     Title = "Turbo Lite",
-    SubTitle = "Premium",
+    SubTitle = "Premium | turbolite.asia",
     TabWidth = 110,
     Size = UDim2.fromOffset(480, 320),
     Acrylic = false,
@@ -3886,7 +3886,7 @@ spawn(function()
       end
    end) 
 
-local Toggle = Tabs.an:AddToggle("Walk Water", { Title = "Walk Water", Default = true })
+local Toggle = Tabs.an:AddToggle("Đi Trên Nước", { Title = "Walk Water", Default = true })
 Toggle:OnChanged(function(Value)
     _G.NuocLon = Value
 end)
