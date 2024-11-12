@@ -86,7 +86,7 @@ checkAndKickPlayer()
 if not game:IsLoaded() then game.Loaded:Wait() end
 local fask = task 
 
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/UI/main/Ui.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "Turbo Lite",
@@ -1716,7 +1716,7 @@ Tabs.Main:AddButton({
         FPSBooster()
     end
 })
-local FASTAT = Tabs.Main:AddToggle("Fast_Attack", {Title = "Fast Attack", Default = true })
+local FASTAT = Tabs.Main:AddToggle("Fast_Attack", {Title = "Skill Attack", Default = true })
 FASTAT:OnChanged(function(value)
 	Fast_Attack = value
 	DamageAura = value
@@ -3849,7 +3849,7 @@ Toggle:OnChanged(function(Value)
     
                   ----------Tab Spawn Boss Katakuri Và Mấy Đồ Linh Tinh-------
 local LinhTinh = Tabs.an:AddSection("Main Setting Config")
-local Toggle = Tabs.an:AddToggle("Turn V4", { Title = "Tự Động Bật V4", Default = false })
+local Toggle = Tabs.an:AddToggle("Turn V4", { Title = "Tự Động Bật V4", Default = true })
 Toggle:OnChanged(function(Value)
     RaceNguLon = Value
 end)
