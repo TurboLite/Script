@@ -163,7 +163,7 @@ if game.PlaceId == 2753915549 then
     elseif game.PlaceId == 7449423635 then
         AnDepZai3 = true
     else
-    game:GetService("Players").LocalPlayer:Kick(" Con Đĩ Mẹ Mày")
+    game:GetService("Players").LocalPlayer:Kick("Kick")
   end
       
          hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Death), function()end)
@@ -3886,7 +3886,7 @@ spawn(function()
       end
    end) 
 
-local Toggle = Tabs.an:AddToggle("Đi Trên Nước", { Title = "Walk Water", Default = true })
+local Toggle = Tabs.an:AddToggle("Đi Trên Nước", { Title = "Đi Trên Nước", Default = true })
 Toggle:OnChanged(function(Value)
     _G.NuocLon = Value
 end)
@@ -3967,9 +3967,9 @@ local DaoNaoCac = Tabs.meo:AddParagraph({
 local function updateMirageStatus()
     local mirageIsland = game.Workspace._WorldOrigin.Locations:FindFirstChild('Đảo Kì Bí')
     if mirageIsland then
-        DaoNaoCac:SetDesc('Trạng Thái 🟢: Đang Có Đảo')
+        DaoNaoCac:SetDesc('🟢: Đang Có Đảo')
     else
-        DaoNaoCac:SetDesc('Trạng Thái 🔴: Không Có Đảo')
+        DaoNaoCac:SetDesc('🔴: Không Có Đảo')
     end
 end
 
