@@ -89,8 +89,8 @@ local fask = task
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Turbo Lite Hub",
-    SubTitle = "Hello World!",
+    Title = "Turbo Lite",
+    SubTitle = "Premium",
     TabWidth = 110,
     Size = UDim2.fromOffset(480, 320),
     Acrylic = false,
@@ -1661,10 +1661,9 @@ LPH_JIT_MAX(function()
 	end)
 end)()
 
-local Section = Tabs.Main:AddSection("Main Setup Setting Farm")
 Tabs.Main:AddButton({
     Title = "Siêu Pro Fix Lag | Booster",
-    Description = "Giảm Độ Họa Để Chơi Mượt Hơn Thoii",
+    Description = "Bấm Booster Để Bật Fix Lag Nha",
     Callback = function()
         local function FPSBooster()
             local decalsyeeted = true
@@ -3874,7 +3873,7 @@ task.spawn(
         end
     end
 )
-local Toggle = Tabs.an:AddToggle("Auto Spawn Boss Kata", { Title = "Auto Spawn Boss Cake Prince", Default = true })
+local Toggle = Tabs.an:AddToggle("Tự Động Spawn Katakuri", { Title = "Tự Động Spawn Katakuti", Default = true })
 Toggle:OnChanged(function(Value)
     _G.AutoSpawnCP = Value
 end)
@@ -4470,22 +4469,6 @@ spawn(
     end
 end
 )
-local KiuTraiAl = Tabs.Race:AddSection("Use Skill Auto Kill Player Trial")
-
-local Toggle = Tabs.Race:AddToggle("Kill Trial", { Title = "Skill Z", Default = false })
-Toggle:OnChanged(function(Ditme)
-    _G.ConCacZ = Ditme
-end)
-
-local Toggle = Tabs.Race:AddToggle("Kill Trial", { Title = "Skill X", Default = false })
-Toggle:OnChanged(function(Lonma)
-    _G.ConCacX = Lonma
-end)
-
-local Toggle = Tabs.Race:AddToggle("Kill Trial", { Title = "Skill C", Default = false })
-Toggle:OnChanged(function(AnDepZai)
-    ConCacC = AnDepZai
-end)
 
 --Deo Muon Lam Aim Nhung Bang Cach Than Ki Nao Do Fast Attack Deo Pha Noi Ken 🤣
                      ------------Tab Raid Và Random Fruit Và Tele Fruit---------                       
