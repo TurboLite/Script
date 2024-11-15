@@ -4052,85 +4052,8 @@ spawn(function()
     end)
 end)
 
-local Toggle = Tabs.meo:AddToggle("Teleport Gear", { Title = "Teleport Advanced Fruit", Default = false })
-Toggle:OnChanged(function(Value)
-    _G.RaDaoKhi = Value
-    StopTween(_G.RaDaoKhi)
-end)
 
-spawn(function()
-    pcall(function()
-        while wait() do
-            if _G.RaDaoKhi then
-                if game:GetService("Workspace").NPCs:FindFirstChild("Advanced Fruit Dealer") then
-                    topos(CFrame.new(game:GetService("Workspace").NPCs["Advanced Fruit Dealer"].HumanoidRootPart.Position))
-                end
-            end
-        end
-    end
-    )
-end
-)
-
-function DaoKhiTrenCaoCuaAn()
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
-        "requestEntrance",
-        Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586)
-        )
-end
-
-Tabs.Race:AddButton({
-    Title = "Teleport To Great Tree",
-    Description = "Tween Đến Đảo Cây",
-    Callback = function()
-    topos(CFrame.new(28603.7305, 14896.5352, 105.38382))
-    wait(.4)
-    local args = {
-    [1] = "RaceV4Progress",
-    [2] = "TeleportBack"
-}
-
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end
-})
-
-Tabs.Race:AddButton({
-    Title = "Teleport Temple",
-    Description = "Tween Đến Cổng Temple",
-    Callback = function()
-       DaoKhiTrenCaoCuaAn()
-    end 
-})
-
-Tabs.Race:AddButton({
-    Title = "Teleport Install Gear",
-    Description = "Tween Đến Chỗ Gắn Gear",
-    Callback = function()
-    topos(CFrame.new(29539.582, 15068.6846, -86.7974472))
-    end
-})
-
-          Tabs.Race:AddButton({
-          Title = "Teleport To Race Door",
-          Description = "Tween Đến Cổng Race",
-          Callback = function()
-	           if game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
-                topos(CFrame.new(29221.822265625, 14890.9755859375, -205.99114990234375))
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
-                topos(CFrame.new(28960.158203125, 14919.6240234375, 235.03948974609375))
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman" then
-                topos(CFrame.new(28231.17578125, 14890.9755859375, -211.64173889160156))
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
-                topos(CFrame.new(28502.681640625, 14895.9755859375, -423.7279357910156))
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
-                topos(CFrame.new(28674.244140625, 14890.6767578125, 445.4310607910156))
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
-                topos(CFrame.new(29012.341796875, 14890.9755859375, -380.1492614746094))
-				end
-end
-})
- 
-local Toggle = Tabs.Race:AddToggle("Auto Complete Trial", { Title = "Auto Train-Buy Gear", Default = false })
+local Toggle = Tabs.Race:AddToggle("Auto Complete Trial", { Title = "Auto Train Mua Gear", Default = false })
 
 Toggle:OnChanged(function(Value)
     _G.Race_Ngu = Value
@@ -4254,7 +4177,7 @@ spawn(
     )
 end
 )                            
-local Toggle = Tabs.Race:AddToggle("Auto Complete Trial", { Title = "Auto Complete Trial", Default = false })
+local Toggle = Tabs.Race:AddToggle("Auto Thành Công Trial", { Title = "Auto Thành Công Trial", Default = false })
 
 Toggle:OnChanged(function(Value)
     _G.AutoComplete_Race = Value
@@ -4429,7 +4352,7 @@ spawn(function()
     end
 end
 )
-local Toggle = Tabs.Race:AddToggle("Kill Trial", { Title = "Kill Player Trial", Default = false })
+local Toggle = Tabs.Race:AddToggle("Kill Trial", { Title = "Auto Kill Người Trial", Default = false })
 Toggle:OnChanged(function(Value)
     _G.Kill_V4 = Value
     AutoActiveRace = Value
@@ -4481,6 +4404,83 @@ spawn(
     end
 end
 )
+local Toggle = Tabs.meo:AddToggle("Teleport Gear", { Title = "Teleport Advanced Fruit", Default = false })
+Toggle:OnChanged(function(Value)
+    _G.RaDaoKhi = Value
+    StopTween(_G.RaDaoKhi)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.RaDaoKhi then
+                if game:GetService("Workspace").NPCs:FindFirstChild("Advanced Fruit Dealer") then
+                    topos(CFrame.new(game:GetService("Workspace").NPCs["Advanced Fruit Dealer"].HumanoidRootPart.Position))
+                end
+            end
+        end
+    end
+    )
+end
+)
+
+function DaoKhiTrenCaoCuaAn()
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+        "requestEntrance",
+        Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586)
+        )
+end
+
+Tabs.Race:AddButton({
+    Title = "Teleport To Great Tree",
+    Description = "Tween Đến Đảo Cây",
+    Callback = function()
+    topos(CFrame.new(28603.7305, 14896.5352, 105.38382))
+    wait(.4)
+    local args = {
+    [1] = "RaceV4Progress",
+    [2] = "TeleportBack"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end
+})
+
+Tabs.Race:AddButton({
+    Title = "Teleport Temple",
+    Description = "Tween Đến Cổng Temple",
+    Callback = function()
+       DaoKhiTrenCaoCuaAn()
+    end 
+})
+
+Tabs.Race:AddButton({
+    Title = "Teleport Install Gear",
+    Description = "Tween Đến Chỗ Gắn Gear",
+    Callback = function()
+    topos(CFrame.new(29539.582, 15068.6846, -86.7974472))
+    end
+})
+
+          Tabs.Race:AddButton({
+          Title = "Teleport To Race Door",
+          Description = "Tween Đến Cổng Race",
+          Callback = function()
+	           if game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
+                topos(CFrame.new(29221.822265625, 14890.9755859375, -205.99114990234375))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
+                topos(CFrame.new(28960.158203125, 14919.6240234375, 235.03948974609375))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman" then
+                topos(CFrame.new(28231.17578125, 14890.9755859375, -211.64173889160156))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
+                topos(CFrame.new(28502.681640625, 14895.9755859375, -423.7279357910156))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
+                topos(CFrame.new(28674.244140625, 14890.6767578125, 445.4310607910156))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
+                topos(CFrame.new(29012.341796875, 14890.9755859375, -380.1492614746094))
+				end
+end
+})
 
 --Deo Muon Lam Aim Nhung Bang Cach Than Ki Nao Do Fast Attack Deo Pha Noi Ken 🤣
                      ------------Tab Raid Và Random Fruit Và Tele Fruit---------                       
