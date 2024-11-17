@@ -3861,30 +3861,6 @@ Toggle:OnChanged(function(Value)
     
                   ----------Tab Spawn Boss Katakuri Và Mấy Đồ Linh Tinh-------
 local LinhTinh = Tabs.an:AddSection("Main Setting Config")
-local Toggle = Tabs.an:AddToggle("Turn V4", { Title = "Tự Động Bật V4", Default = true })
-Toggle:OnChanged(function(Value)
-    RaceNguLon = Value
-end)
-
-task.spawn(
-    function()
-        while task.wait() do
-            task.wait()
-            if RaceNguLon then
-                if
-                game.Players.LocalPlayer.Character:FindFirstChild("RaceEnergy") and
-                game.Players.LocalPlayer.Character.RaceEnergy.Value >= 1 and
-                not game.Players.LocalPlayer.Character.RaceTransformed.Value
-                then
-                    local be = game:service("VirtualInputManager")
-                    be:SendKeyEvent(true, "Y", false, game)
-                    task.wait()
-                    be:SendKeyEvent(false, "Y", false, game)
-                end
-            end
-        end
-    end
-)
 local Toggle = Tabs.an:AddToggle("Tự Động Spawn Katakuri", { Title = "Tự Động Spawn Katakuti", Default = true })
 Toggle:OnChanged(function(Value)
     _G.AutoSpawnCP = Value
@@ -4052,6 +4028,30 @@ spawn(function()
     end)
 end)
 
+local Toggle = Tabs.Race:AddToggle("Turn V4", { Title = "Auto Tự Bật Tộc V4", Default = true })
+Toggle:OnChanged(function(Value)
+    RaceNguLon = Value
+end)
+
+task.spawn(
+    function()
+        while task.wait() do
+            task.wait()
+            if RaceNguLon then
+                if
+                game.Players.LocalPlayer.Character:FindFirstChild("RaceEnergy") and
+                game.Players.LocalPlayer.Character.RaceEnergy.Value >= 1 and
+                not game.Players.LocalPlayer.Character.RaceTransformed.Value
+                then
+                    local be = game:service("VirtualInputManager")
+                    be:SendKeyEvent(true, "Y", false, game)
+                    task.wait()
+                    be:SendKeyEvent(false, "Y", false, game)
+                end
+            end
+        end
+    end
+)
 
 local Toggle = Tabs.Race:AddToggle("Auto Complete Trial", { Title = "Auto Train Mua Gear", Default = false })
 
