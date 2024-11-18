@@ -117,7 +117,6 @@ local Tabs = {
     item = Window:AddTab({ Title = "Auto Item", Icon = "" }),
     C = Window:AddTab({ Title = "Kill Player", Icon = "" }),
     tele = Window:AddTab({ Title = "Dịch Chuyển", Icon = "" }),
-    an = Window:AddTab({ Title = "Config Misc", Icon = "" }),
     meo = Window:AddTab({ Title = "Đảo Bí Ẩn", Icon = "" }),
     Race = Window:AddTab({ Title = "Trial Tộc V4", Icon = "" }),
     Raid = Window:AddTab({ Title = "Raid Fruit", Icon = "" }),
@@ -2974,7 +2973,7 @@ spawn(function()
             end
         end
     end)       
-local Toggle = Tabs.item:AddToggle("Auto Saber", { Title = "Auto Kiếm Saber | Sea 1", Default = false })
+local Toggle = Tabs.item:AddToggle("Auto Saber", { Title = "Auto Lấy Kiếm Saber", Default = false })
 Toggle:OnChanged(function(Value)
     _G.Cuttay = Value
     StopTween(_G.Cuttay)
@@ -3085,7 +3084,7 @@ spawn(function()
     end)
 
 
-local Toggle = Tabs.item:AddToggle("Auto Pole", { Title = "Auto Kiếm Pole | Sea 1", Default = false })
+local Toggle = Tabs.item:AddToggle("Auto Pole", { Title = "Auto Lấy Kiếm Pole", Default = false })
 Toggle:OnChanged(function(LuoiQuaAeOi)
     _G.Khi_Dot_Len_Dien = LuoiQuaAeOi
     StopTween(_G.Khi_Dot_Len_Dien)
@@ -3130,7 +3129,7 @@ end)
         end
     end)   
     
-local Toggle = Tabs.item:AddToggle("Auto Rengoku", { Title = "Auto Kiếm Rengoku | Sea 2", Default = false })
+local Toggle = Tabs.item:AddToggle("Auto Rengoku", { Title = "Auto Lấy Kiếm Rengoku", Default = false })
 Toggle:OnChanged(function(Value)
     _G.Kiem_Lua = Value
     StopTween(_G.Kiem_Lua)
@@ -3166,7 +3165,7 @@ spawn(function()
         end)
     end)
 
-local Toggle = Tabs.item:AddToggle("Auto Ectoplasm", { Title = "Auto item Ectoplasm | Sea 2", Default = false })
+local Toggle = Tabs.item:AddToggle("Auto Ectoplasm", { Title = "Auto Farm Ectoplasm", Default = false })
 Toggle:OnChanged(function(Value)
     Auto_Ki_Di = Value
     StopTween(Auto_Ki_Di)
@@ -3203,7 +3202,7 @@ end)
         end
     end)
 
-local Toggle = Tabs.item:AddToggle("Auto Ectoplasm", { Title = "Auto Mua 3 Kiếm Zero | Sea 2", Default = false })
+local Toggle = Tabs.item:AddToggle("Auto Ectoplasm", { Title = "Auto Mua 3 Kiếm Zero", Default = false })
 Toggle:OnChanged(function(KiemNhuLon)
     NgayXuaNgayXuaCoNguoiTenLaAnDepTraiDaTaiDepTraNoiTiengTiktokNoiYoutubeCungNoiHayKiemMotNguoiDangCapHonAnDepZaiDiNheCacBanHuhuHu = KiemNhuLon
 end)      
@@ -3232,7 +3231,7 @@ spawn(function()
     end
 end)
 --//Farm Sea 3 BABABABABABAABABABABABABABABABABA
-local Toggle = Tabs.item:AddToggle("auto Kill", { Title = "Auto Làm Holy Torch | Sea 3",  Default = false })
+local Toggle = Tabs.item:AddToggle("auto Kill", { Title = "Auto Nhiệm Vụ Holy Torch",  Default = false })
 Toggle:OnChanged(function(Value)
 _G.Gan_Duoc_Cho_Khi = Value
 StopTween(_G.Gan_Duoc_Cho_Khi)
@@ -3283,7 +3282,7 @@ spawn(function()
     end
 end)
 
-local Toggle = Tabs.item:AddToggle("auto Change", { Title = "Đổi Haki Aura | All Sea", Default = false })
+local Toggle = Tabs.item:AddToggle("auto Change", { Title = "Haki Aura", Default = false })
 Toggle:OnChanged(function(Value)
 Gan_Haki_Lon = Value
 StopTween(Gan_Haki_Lon)
@@ -3320,7 +3319,7 @@ spawn(function()
     end
 end)
 
-local Toggle = Tabs.item:AddToggle("auto Kill", { Title = "Auto Đánh Rip_Indra | Sea 3", Description = "", Default = false })
+local Toggle = Tabs.item:AddToggle("auto Kill", { Title = "Auto Kill Rip_Indra", Description = "", Default = false })
 Toggle:OnChanged(function(Value)
 _G.ThangDauMatLon = Value
 StopTween(_G.ThangDauMatLon)
@@ -3359,7 +3358,7 @@ end)
         end)
     end)
 
-local Toggle = Tabs.item:AddToggle("auto Kill", { Title = "Auto Kiếm Tushita | Sea 3", Default = false })
+local Toggle = Tabs.item:AddToggle("auto Kill", { Title = "Auto Lấy Kiếm Tushita", Default = false })
 Toggle:OnChanged(function(Value)
 _G.Long_Ma_Bac_Giang = Value
 StopTween(_G.Long_Ma_Bac_Giang)
@@ -3409,7 +3408,7 @@ end)
         end
     end)
 
-local Toggle = Tabs.item:AddToggle("Auto Eliter Hunter", { Title = "Auto Đánh Eliter Hunter | Sea 3", Default = false })
+local Toggle = Tabs.item:AddToggle("Auto Eliter Hunter", { Title = "Auto Kill Eliter Hunter", Default = false })
 Toggle:OnChanged(function(Value)
     _G.Eli_Ngu = Value
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
@@ -3461,7 +3460,7 @@ spawn(function()
 		end
 	end)
 	
-local Toggle = Tabs.item:AddToggle("auto Change", { Title = "Auto Đánh Dough King | Sea 3", Description = "", Default = false })
+local Toggle = Tabs.item:AddToggle("auto Change", { Title = "Auto Kill Dough King", Description = "", Default = false })
 Toggle:OnChanged(function(Value)
 _G.Katakuri_V2_Nhu_lon = Value
 StopTween(_G.Katakuri_V2_Nhu_lon)
@@ -3859,105 +3858,19 @@ Toggle:OnChanged(function(Value)
         StopTween(_G.BayDao)
     end)
     
-                  ----------Tab Spawn Boss Katakuri Và Mấy Đồ Linh Tinh-------
-local LinhTinh = Tabs.an:AddSection("Main Setting Config")
-local Toggle = Tabs.an:AddToggle("Tự Động Spawn Katakuri", { Title = "Tự Động Spawn Katakuti", Default = true })
-Toggle:OnChanged(function(Value)
-    _G.AutoSpawnCP = Value
-end)
-
-spawn(function() 
-   while wait() do
-      if _G.AutoSpawnCP then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner",true)        
-         end
-      end
-   end) 
-
-local Toggle = Tabs.an:AddToggle("Đi Trên Nước", { Title = "Đi Trên Nước", Default = true })
-Toggle:OnChanged(function(Value)
-    _G.NuocLon = Value
-end)
-
-spawn(function()
-      while task.wait() do
-		pcall(function()
-			if _G.NuocLon then
-		    	game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
-					else
-				game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
-					end
-				end)
-			end
-		end)
-                          
-local Toggle = Tabs.an:AddToggle("Walk Water", { Title = "Auto Rejoin", Description = "Rejoin When Kick", Default = false })
-Toggle:OnChanged(function(Value)
-    _G.Rejoin = Value
-end)                          
-                          
-spawn(function()
-    while true do wait()
-        getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(Kick)
-            if not _G.TP_Ser and _G.Rejoin then
-                if Kick.Name == 'ErrorPrompt' and Kick:FindFirstChild('MessageArea') and Kick.MessageArea:FindFirstChild("ErrorFrame") then
-                    game:GetService("TeleportService"):Teleport(game.PlaceId)
-                    wait(50)
-                end
-            end
-        end)
-    end
-end)                          
-
-local Toggle = Tabs.an:AddToggle("RemoveConMe", { Title = "Remove Damege", Description = "Xoá Damege", Default = false })
-Toggle:OnChanged(function(AnDepZaiHubOnTop)
-   removedame = AnDepZaiHubOnTop
-end)
-
-spawn(function()
-   while wait() do
-      if removedame then
-         game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-        else
-         game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
-         end
-     end
- end)
-
-local Toggle = Tabs.an:AddToggle("RemoveConMe", { Title = "Xoá Thông Báo", Description = "Xoá Thông Báo Khi Những Gì Bạn Farm", Default = false })
-Toggle:OnChanged(function(AnDepZaiHubOnTop)
-   removenotify = AnDepZaiHubOnTop
-end)
-
-spawn(function()
-   while wait() do
-      if removenotify then
-         game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
-      else
-         game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
-      end
-   end
-end)
-
-Tabs.an:AddButton({
-    Title = "Hop Server Low Player",
-    Description = "",
-    Callback = function()
-HopLowServer()
-    end
-})
+               
 -------Tab Race-----
 local DaoNaoCac = Tabs.meo:AddParagraph({
-    Title = "Trạng Thái Đảo Bí Ẩn",
+    Title = "Trạng Thái Đảo",
     Content = ""
 })
 
 local function updateMirageStatus()
     local mirageIsland = game.Workspace._WorldOrigin.Locations:FindFirstChild('Đảo Kì Bí')
     if mirageIsland then
-        DaoNaoCac:SetDesc('🟢: Đang Có Đảo')
+        DaoNaoCac:SetDesc('🟢 — Đang Có Đảo')
     else
-        DaoNaoCac:SetDesc('🔴: Không Có Đảo')
+        DaoNaoCac:SetDesc('🔴 — Không Có Đảo')
     end
 end
 
@@ -3968,7 +3881,7 @@ spawn(function()
 end
 )
 
-local Toggle = Tabs.meo:AddToggle("Teleport", { Title = "Teleport Mirage Island", Default = false })
+local Toggle = Tabs.meo:AddToggle("Teleport", { Title = "Auto Bay Đến Đảo", Default = false })
 Toggle:OnChanged(function(Value)
     _G.DaoBiLon = Value
     StopTween(_G.DaoBiLon)
@@ -3985,7 +3898,7 @@ spawn(function()
                 end
             end)
         end)
-local Toggle = Tabs.meo:AddToggle("Teleport Gear", { Title = "Lock Moon", Default = false })
+local Toggle = Tabs.meo:AddToggle("Teleport Gear", { Title = "Auto Nhìn Mặt Trăng", Default = false })
 Toggle:OnChanged(function(Value)
     _G.TrangNhuCaiLonTao = Value
 end)
@@ -4004,7 +3917,7 @@ spawn(function()
 end)
 
 
-local Toggle = Tabs.meo:AddToggle("Teleport Gear", { Title = "Teleport Gear", Default = false })
+local Toggle = Tabs.meo:AddToggle("Teleport Gear", { Title = "Auto Đi Lấy Gear", Default = false })
 Toggle:OnChanged(function(Value)
     _G.Luom_Gear = Value
     StopTween(_G.Luom_Gear)
@@ -4885,6 +4798,22 @@ Tabs.Melee:AddButton({
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
     end    
 })
+local Toggle = Tabs.Melee:AddToggle("Đi Được Trên Nước", { Title = "Đi Được Trên Nước", Default = true })
+Toggle:OnChanged(function(Value)
+    _G.NuocLon = Value
+end)
+
+spawn(function()
+      while task.wait() do
+		pcall(function()
+			if _G.NuocLon then
+		    	game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+					else
+				game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+					end
+				end)
+			end
+		end)
 repeat
     wait()
 until game:IsLoaded()
