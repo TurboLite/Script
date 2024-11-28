@@ -164,16 +164,3 @@ end
 
 -- Kích hoạt AutoFarm
 spawn(AutoFarmChests)
-
--- Hop
-function teleportToCurrentPlace()
-    local TeleportService = game:GetService("TeleportService")
-    local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
-
-    -- Teleport the player to the current place
-    TeleportService:Teleport(game.PlaceId, LocalPlayer)
-end
-
--- Gọi hàm để chạy
-teleportToCurrentPlace()
