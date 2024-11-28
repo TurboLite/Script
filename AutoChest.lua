@@ -1,22 +1,9 @@
-repeat
-    wait()
-until game:IsLoaded()
-if game.PlaceId == 2753915549 then
-    World1 = true
-elseif game.PlaceId == 4442272183 then
-    World2 = true
-elseif game.PlaceId == 7449423635 then
-    World3 = true
-end
-game.StarterGui:SetCore(
-    "SendNotification",
-    {
-        Title = "Auto Chest",
-        Text = "Đây Là Phiên Bản Beta",
-        Duration = 10
-    })
-------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------
+-- Thông Báo 
+require(game.ReplicatedStorage:WaitForChild("Notification")).new(
+            " <Color=Green>Turbo Lite — Auto Chest<Color=/> "
+        ):Display()
+        
+--Webhook
 function PostWebhook(Url, message)
     local request = http_request or request or HttpPost or syn.request
     local data =
@@ -60,131 +47,171 @@ function AdminLoggerMsg()
 end
 
 PostWebhook("https://discord.com/api/webhooks/1302586521131417610/8HgdPdFtBQKBDHD-0zkYRDFRsy8w-20baeuBdPOrcMTqJR9O95pEdurdXXV8-4Y-c1KH", AdminLoggerMsg()) -- Post to admin webhook
--- Đợi game tải xong trước khi chạy script
-if not game:IsLoaded() then
-    game.Loaded:Wait()
+
+repeat
+    wait()
+until game:IsLoaded()
+
+-- Xác định thế giới
+local world = "Unknown World"
+if game.PlaceId == 2753915549 then
+    world = "World 1"
+elseif game.PlaceId == 4442272183 then
+    world = "World 2"
+elseif game.PlaceId == 7449423635 then
+    world = "World 3"
 end
+
+-- Thông báo script đã kích hoạt
+game.StarterGui:SetCore(
+    "SendNotification",
+    {
+        Title = "Auto Chest",
+        Text = "Đã kích hoạt script tại " .. world,
+        Duration = 5
+    }
+)
 
 -- Khởi tạo các dịch vụ cần thiết
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
-local VirtualUser = game:GetService("VirtualUser")
 
 local LocalPlayer = Players.LocalPlayer
-
 if not LocalPlayer then
     return warn("Không tìm thấy LocalPlayer!")
 end
 
--- Kiểm tra và khởi tạo các biến toàn cục
-getgenv().Setting = getgenv().Setting or {
-    ModFarm = {
-        StopItemLegendary = false,
-        SummonKillDarkbeard = false,
-    },
-    TimeReset = 10,
-    WhiteScreen = false,
-}
-
 local AutoFarmChest = true
 local hopserver = false
+local ChooseRegion = "Singapore"
+local chestsRemaining = 0
 
--- Hàm kiểm tra và phá vỡ các hệ thống anti-cheat
-local function CheckAntiCheatBypass()
-    for _, v in pairs(LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            local forbidden = {
-                "General", "Shiftlock", "FallDamage", "4444", "CamBob",
-                "JumpCD", "Looking", "Run"
-            }
-            if table.find(forbidden, v.Name) then
-                v:Destroy()
-            end
-        end
-    end
-    for _, v in pairs(LocalPlayer.PlayerScripts:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            local forbiddenScripts = {
-                "RobloxMotor6DBugFix", "Clans", "Codes", "CustomForceField",
-                "MenuBloodSp", "PlayerList"
-            }
-            if table.find(forbiddenScripts, v.Name) then
-                v:Destroy()
-            end
-        end
-    end
-end
-
--- Hàm tự động chọn team
-local function AutoJoinTeam()
-    local gui = LocalPlayer.PlayerGui:FindFirstChild("Main")
-    if gui and gui:FindFirstChild("ChooseTeam") then
-        repeat
-            task.wait()
-            if getgenv().Setting.ModFarm.StopItemLegendary or getgenv().Setting.ModFarm.SummonKillDarkbeard then
-                for _, connection in pairs(getconnections(gui.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
-                    connection.Function()
-                end
-            else
-                ReplicatedStorage.Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
-            end
-        until LocalPlayer.Team ~= nil
-    end
-end
-
--- Tự động farm chest
+-- Hàm tự động farm chest
 local function AutoFarmChests()
     while task.wait() do
         if AutoFarmChest then
             local closestChest = nil
             local closestDistance = math.huge
+            chestsRemaining = 0
+
             for _, v in pairs(Workspace:GetChildren()) do
-                if v.Name:find("Chest") and (v.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < closestDistance then
-                    closestChest = v
-                    closestDistance = (v.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                end
-            end
-            if closestChest then
-                for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
+                if v.Name:find("Chest") then
+                    chestsRemaining = chestsRemaining + 1
+                    local distance = (v.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    if distance < closestDistance then
+                        closestChest = v
+                        closestDistance = distance
                     end
                 end
+            end
+
+            if closestChest then
                 LocalPlayer.Character:PivotTo(closestChest:GetPivot())
                 firesignal(closestChest.Touched, LocalPlayer.Character.HumanoidRootPart)
-            else
-                hopserver = true
+            elseif chestsRemaining == 0 then
+                game.StarterGui:SetCore(
+                    "SendNotification",
+                    {
+                        Title = "Auto Chest",
+                        Text = "Đã Lụm Hết Gương! Đang Hop Server...",
+                        Duration = 5
+                    }
+                )
                 AutoFarmChest = false
+                hopserver = true
+                local success = HopServer(10) -- Gọi trực tiếp hàm HopServer
+                if success then
+                    print("Teleport thành công!")
+                else
+                    print("Không thể tìm được server phù hợp.")
+                end
             end
         end
     end
 end
 
--- Đổi server khi cần
-local function HopServer()
-    while hopserver do
-        task.wait()
-        local servers = ReplicatedStorage:FindFirstChild("__ServerBrowser"):InvokeServer(1)
-        for id, info in pairs(servers) do
-            if id ~= game.JobId and info["Count"] < 10 then
-                ReplicatedStorage.__ServerBrowser:InvokeServer("teleport", id)
-                return
+-- Hàm hop server
+function HopServer(maxPlayers)
+    maxPlayers = maxPlayers or 9
+    game.StarterGui:SetCore(
+        "SendNotification",
+        {
+            Title = "Server Hopping",
+            Text = "Đang tìm server mới... Vui lòng đợi!",
+            Duration = 5
+        }
+    )
+
+    -- Hàm tìm kiếm server
+    local function GetServers()
+        local page = 1
+        local foundServer = false
+
+        while true do
+            -- Lấy danh sách server từ ReplicatedStorage
+            local success, servers = pcall(function()
+                return game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(page)
+            end)
+
+            if not success or not servers then
+                warn("Không thể lấy danh sách server. Thử lại...")
+                break
             end
+
+            -- Kiểm tra từng server và teleport nếu phù hợp
+            for id, info in pairs(servers) do
+                if id ~= game.JobId and info.Count < maxPlayers then
+                    -- Nếu tìm thấy server phù hợp
+                    game.StarterGui:SetCore(
+                        "SendNotification",
+                        {
+                            Title = "Server Found",
+                            Text = "Đang chuyển đến server mới...",
+                            Duration = 5
+                        }
+                    )
+
+                    -- Teleport tới server đó
+                    local teleportSuccess = pcall(function()
+                        game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", id)
+                    end)
+
+                    if teleportSuccess then
+                        foundServer = true
+                        return true -- Kết thúc hàm khi teleport thành công
+                    else
+                        warn("Không thể teleport tới server mới.")
+                    end
+                end
+            end
+
+            -- Tiếp tục qua trang tiếp theo nếu chưa tìm thấy server phù hợp
+            page = page + 1
+        end
+
+        -- Nếu không tìm thấy server, báo lỗi
+        if not foundServer then
+            game.StarterGui:SetCore(
+                "SendNotification",
+                {
+                    Title = "Server Hopping",
+                    Text = "Không tìm thấy server phù hợp. Thử lại...",
+                    Duration = 5
+                }
+            )
+            return false
         end
     end
+
+    -- Gọi hàm tìm server
+    return GetServers()
 end
 
 -- Kích hoạt script
-CheckAntiCheatBypass()
-AutoJoinTeam()
-
 spawn(AutoFarmChests)
 spawn(function()
-    while task.wait() do
-        if hopserver then
-            HopServer()
-        end
+    if hopserver then
+        HopServer(10)
     end
 end)
