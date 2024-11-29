@@ -1,119 +1,67 @@
--- Thông Báo 
-require(game.ReplicatedStorage:WaitForChild("Notification")).new(
-            " <Color=Red>Turbo Lite — Teleport Sukuna<Color=/> "
+-- Lua Obf By Turbo Lite -- 
+function GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo(code)res=''for i in ipairs(code)do res=res..string.char(code[i]/105)end return res end 
+
+
+-- Skibiki Meo
+require(game.ReplicatedStorage:WaitForChild(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8190,11655,12180,11025,10710,11025,10395,10185,12180,11025,11655,11550}))).new(
+            GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({3360,6300,7035,11655,11340,11655,11970,6405,8610,10605,10500,6510,8820,12285,11970,10290,11655,3360,7980,11025,12180,10605,3360,23730,13440,15540,3360,8820,10605,11340,10605,11760,11655,11970,12180,3360,8715,12285,11235,12285,11550,10185,6300,7035,11655,11340,11655,11970,6405,4935,6510,3360})
         ):Display()
         
--- Join 
--- Kiểm tra xem giao diện chọn đội có tồn tại không
-if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    -- Chọn đội "Pirates" ngay lập tức
-    local chooseTeamGui = game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam
-    local piratesButton = chooseTeamGui.Container["Pirates"].Frame.TextButton
+local Players = game:GetService(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8400,11340,10185,12705,10605,11970,12075}))
+local plr = Players.LocalPlayer
+local mouse = plr:GetMouse()
 
-    -- Kích hoạt sự kiện khi người chơi chọn đội "Pirates"
+-- Meo
+local InfAbility = true
+
+-- Skibiki 
+local joinSound = Instance.new(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8715,11655,12285,11550,10500}))
+joinSound.Name = GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({7770,11655,11025,11550,8715,11655,12285,11550,10500})
+joinSound.SoundId = GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5775,5880,5145,5775,5355,5460,5145,5145,5880,5250}) -- ID nhạc khi chạy mã
+joinSound.Volume = 1
+joinSound.Looped = false
+joinSound.Parent = workspace
+joinSound:Play()
+
+-- Kiểm tra giao diện chọn đội và tự động chọn GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8400,11025,11970,10185,12180,10605,12075})
+if plr.PlayerGui.Main:FindFirstChild(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({7035,10920,11655,11655,12075,10605,8820,10605,10185,11445})) then
+    local chooseTeamGui = plr.PlayerGui.Main.ChooseTeam
+    local piratesButton = chooseTeamGui.Container[GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8400,11025,11970,10185,12180,10605,12075})].Frame.TextButton
+
+    -- Kích hoạt sự kiện khi chọn đội GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8400,11025,11970,10185,12180,10605,12075})
     for _, connection in pairs(getconnections(piratesButton.Activated)) do
-        -- Giả lập việc nhấn nút
-        for _, inputConnection in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-            inputConnection:Fire() 
-        end
-        -- Thực thi hành động liên kết với nút
         connection.Function()
     end
 end
 
-local Players = game:GetService("Players")
-local plr = Players.LocalPlayer
-local mouse = plr:GetMouse()
-
--- Biến để kiểm soát khả năng "Infinite Ability"
-local InfAbility = true
-
--- Tạo công cụ teleport
-local tool = Instance.new("Tool")
+-- Meoxw
+local tool = Instance.new(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8820,11655,11655,11340}))
 tool.RequiresHandle = false
-tool.Name = "Teleport Tool"
+tool.Name = GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8715,12285,11235,12285,11550,10185})
 
--- Tạo âm thanh cho công cụ teleport
-local sound = Instance.new("Sound")
-sound.Name = "TeleportSound"
-sound.SoundId = "rbxassetid://7067700233" -- ID nhạc tốc biến của Goku
-sound.Volume = 1
-sound.Looped = false
-sound.Parent = tool
+-- Meooo
+local teleportSound = Instance.new(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8715,11655,12285,11550,10500}))
+teleportSound.Name = GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({8820,10605,11340,10605,11760,11655,11970,12180,8715,11655,12285,11550,10500})
+teleportSound.SoundId = GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5670,5565,5880,5145,5670,5145,5460,5775,5250,5565}) 
+teleportSound.Volume = 1
+teleportSound.Looped = false
+teleportSound.Parent = tool
 
--- Hàm để thêm hiệu ứng Infinite Ability
+-- Meokkk
 local function InfAb()
-    if InfAbility then
-        local root = plr.Character.HumanoidRootPart
-        if not root:FindFirstChild("Agility") then
-            local inf = Instance.new("ParticleEmitter")
-            inf.Acceleration = Vector3.new(0, 0, 0)
-            inf.Drag = 20
-            inf.EmissionDirection = Enum.NormalId.Top
-            inf.Enabled = true
-            inf.Lifetime = NumberRange.new(0.5, 1)
-            inf.LightInfluence = 0
-            inf.LockedToPart = true
-            inf.Name = "Agility"
-            inf.Rate = 500
+    local character = plr.Character
+    if not character then return end
 
-            -- Kích thước hạt
-            local numberKeypoints2 = {
-                NumberSequenceKeypoint.new(0, 0),
-                NumberSequenceKeypoint.new(1, 4)
-            }
-            inf.Size = NumberSequence.new(numberKeypoints2)
-            inf.RotSpeed = NumberRange.new(9999, 99999)
-            inf.Speed = NumberRange.new(30, 30)
-            inf.ZOffset = 2
-
-            -- Hiệu ứng màu
-            inf.Color = ColorSequence.new(
-                Color3.fromRGB(0, 255, 0), -- Màu xanh lá
-                Color3.fromRGB(0, 0, 255)  -- Màu xanh dương
-            )
-            inf.Transparency = NumberSequence.new(0)
-
-            inf.Parent = root
-        end
-    else
-        local root = plr.Character.HumanoidRootPart
-        if root:FindFirstChild("Agility") then
-            root:FindFirstChild("Agility"):Destroy()
+    local humanoid = character:FindFirstChildOfClass(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({7560,12285,11445,10185,11550,11655,11025,10500}))
+    if humanoid then
+        if InfAbility then
+            humanoid.WalkSpeed = 300 --
+        else
+            humanoid.WalkSpeed = 16 --
         end
     end
 end
 
--- Tùy chọn bật/tắt Infinite Ability
-local function ToggleInfAbility(Value)
-    InfAbility = Value
-    local root = plr.Character.HumanoidRootPart
-    if not Value and root:FindFirstChild("Agility") then
-        root:FindFirstChild("Agility"):Destroy()
-    end
-end
-
--- Đặt giá trị mặc định cho Infinite Ability
-ToggleInfAbility(true)
-
--- Kết nối khi công cụ được kích hoạt
-tool.Activated:Connect(function()
-    if not plr.Character or not plr.Character:FindFirstChild("HumanoidRootPart") then return end
-
-    local root = plr.Character.HumanoidRootPart
-    local pos = mouse.Hit.Position + Vector3.new(0, 2.5, 0)
-    root.CFrame = CFrame.new(pos)
-    
-    -- Phát âm thanh
-    sound:Play()
-
-    -- Thêm hiệu ứng Infinite Ability mỗi lần teleport
-    InfAb()
-end)
-
-tool.Parent = plr.Backpack
-
--- Vòng lặp kiểm tra trạng thái Infinite Ability
 spawn(function()
     while wait() do
         if InfAbility then
@@ -121,3 +69,16 @@ spawn(function()
         end
     end
 end)
+
+
+tool.Activated:Connect(function()
+    if not plr.Character or not plr.Character:FindFirstChild(GErdhiyRZRwWRHDIsIoVigucQLkjxGvFLbNzYWBbOczAIrpbtrUNtnJzUHaKffvgo({7560,12285,11445,10185,11550,11655,11025,10500,8610,11655,11655,12180,8400,10185,11970,12180})) then return end
+
+    local root = plr.Character.HumanoidRootPart
+    local pos = mouse.Hit.Position + Vector3.new(0, 2.5, 0)
+    root.CFrame = CFrame.new(pos)
+    
+    teleportSound:Play()
+end)
+
+tool.Parent = plr.Backpack    
