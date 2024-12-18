@@ -11,8 +11,8 @@ end
 game.StarterGui:SetCore(
     "SendNotification",
     {
-        Title = "Đang Tải",
-        Text = "Hãy Đợi Chút Nha",
+        Title = "Đã Fix Lag Xong!",
+        Text = "Tạo Bởi Turbo Lite",
         Duration = 3
     })
 
@@ -64,3 +64,65 @@ local function FPSBooster()
 end
 
 FPSBooster()
+-- Code hiển thị Ping: giá trị và FPS (120 FPS) trong Blox Fruits (cao nhất trên màn hình và không khung nền)
+
+-- Tạo GUI để hiển thị Ping và FPS
+local ScreenGui = Instance.new("ScreenGui")
+local PingLabel = Instance.new("TextLabel")
+local FPSLabel = Instance.new("TextLabel")
+
+-- Đặt thuộc tính cho ScreenGui
+ScreenGui.Name = "PingFPSDisplay"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Thuộc tính cho PingLabel
+PingLabel.Name = "PingLabel"
+PingLabel.Parent = ScreenGui
+PingLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
+PingLabel.Position = UDim2.new(0.9, 0, 0, 0) -- Vị trí góc phải trên, đứng cao nhất
+PingLabel.Size = UDim2.new(0.1, 0, 0.05, 0)
+PingLabel.Font = Enum.Font.SourceSans
+PingLabel.TextColor3 = Color3.new(1, 1, 1)
+PingLabel.TextSize = 14
+PingLabel.Text = "Ping: 0 ms" -- Hiển thị "Ping: 0 ms" mặc định
+
+-- Thuộc tính cho FPSLabel
+FPSLabel.Name = "FPSLabel"
+FPSLabel.Parent = ScreenGui
+FPSLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
+FPSLabel.Position = UDim2.new(0.9, 0, 0.05, 0) -- Vị trí ngay dưới PingLabel, đứng cao nhất
+FPSLabel.Size = UDim2.new(0.1, 0, 0.05, 0)
+FPSLabel.Font = Enum.Font.SourceSans
+FPSLabel.TextColor3 = Color3.new(1, 1, 1)
+FPSLabel.TextSize = 14
+FPSLabel.Text = "FPS: Calculating..."
+
+-- Hàm cập nhật Ping
+local RunService = game:GetService("RunService")
+local function UpdatePing()
+    while true do
+        local pingValue = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+        local pingNumber = tonumber(pingValue:match("([0-9]+)")) -- Lấy số từ chuỗi (loại bỏ phần "ms")
+        PingLabel.Text = "Ping: " .. tostring(pingNumber) .. " ms" -- Hiển thị "Ping: giá trị ms"
+        wait(1) -- Cập nhật mỗi giây
+    end
+end
+
+-- Hàm cập nhật FPS
+local function UpdateFPS()
+    local lastTime = tick()
+    local frameCount = 0
+    while true do
+        frameCount = frameCount + 1
+        if tick() - lastTime >= 1 then
+            FPSLabel.Text = "FPS: " .. tostring(math.min(frameCount, 120)) -- Giới hạn tối đa 120 FPS
+            frameCount = 0
+            lastTime = tick()
+        end
+        RunService.RenderStepped:Wait() -- Cập nhật mỗi frame
+    end
+end
+
+-- Chạy các hàm cập nhật
+spawn(UpdatePing)
+spawn(UpdateFPS)
