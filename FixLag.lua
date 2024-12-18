@@ -64,10 +64,11 @@ local function FPSBooster()
 end
 
 FPSBooster()
--- Code hiển thị Ping: giá trị và FPS (120 FPS) trong Blox Fruits (cao nhất trên màn hình và không khung nền)
+-- Code hiển thị dsc.gg/meowx, Ping: giá trị và FPS (120 FPS) trong Blox Fruits (cao nhất trên màn hình và không khung nền)
 
--- Tạo GUI để hiển thị Ping và FPS
+-- Tạo GUI để hiển thị dsc.gg/meowx, Ping và FPS
 local ScreenGui = Instance.new("ScreenGui")
+local LinkLabel = Instance.new("TextLabel") -- Thêm Label cho đường dẫn dsc.gg/meowx
 local PingLabel = Instance.new("TextLabel")
 local FPSLabel = Instance.new("TextLabel")
 
@@ -75,23 +76,36 @@ local FPSLabel = Instance.new("TextLabel")
 ScreenGui.Name = "PingFPSDisplay"
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Thuộc tính cho PingLabel
+-- Thuộc tính cho LinkLabel (hiển thị dsc.gg/meowx)
+LinkLabel.Name = "LinkLabel"
+LinkLabel.Parent = ScreenGui
+LinkLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
+LinkLabel.Position = UDim2.new(0.1, 0, 0, 0) -- Di chuyển vị trí sang bên trái (0.1, 0 là 10% từ bên trái màn hình)
+LinkLabel.Size = UDim2.new(0, 250, 0, 20) -- Điều chỉnh chiều rộng (250 pixel)
+LinkLabel.Font = Enum.Font.SourceSans -- Đặt font giống PingLabel
+LinkLabel.TextColor3 = Color3.new(1, 1, 1) -- Màu chữ trắng
+LinkLabel.TextSize = 14 -- Đặt kích thước chữ giống với PingLabel
+LinkLabel.Text = "dsc.gg/meowx" -- Hiển thị đường dẫn dsc.gg/meowx
+LinkLabel.TextWrapped = true -- Cho phép tự động xuống dòng khi cần thiết
+LinkLabel.TextScaled = false -- Tắt tính năng TextScaled để giữ nguyên kích thước chữ
+
+-- Thuộc tính cho PingLabel (di chuyển sang bên trái, dưới LinkLabel)
 PingLabel.Name = "PingLabel"
 PingLabel.Parent = ScreenGui
 PingLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
-PingLabel.Position = UDim2.new(0.9, 0, 0, 0) -- Vị trí góc phải trên, đứng cao nhất
-PingLabel.Size = UDim2.new(0.1, 0, 0.05, 0)
-PingLabel.Font = Enum.Font.SourceSans
+PingLabel.Position = UDim2.new(0.1, 0, 0.05, 0) -- Vị trí dưới LinkLabel, bên trái
+PingLabel.Size = UDim2.new(0, 250, 0, 20) -- Đặt chiều rộng giống như LinkLabel
+PingLabel.Font = Enum.Font.SourceSans -- Đặt font giống LinkLabel
 PingLabel.TextColor3 = Color3.new(1, 1, 1)
-PingLabel.TextSize = 14
+PingLabel.TextSize = 14 -- Đặt kích thước chữ giống LinkLabel
 PingLabel.Text = "Ping: 0 ms" -- Hiển thị "Ping: 0 ms" mặc định
 
--- Thuộc tính cho FPSLabel
+-- Thuộc tính cho FPSLabel (di chuyển sang bên trái, dưới PingLabel)
 FPSLabel.Name = "FPSLabel"
 FPSLabel.Parent = ScreenGui
 FPSLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
-FPSLabel.Position = UDim2.new(0.9, 0, 0.05, 0) -- Vị trí ngay dưới PingLabel, đứng cao nhất
-FPSLabel.Size = UDim2.new(0.1, 0, 0.05, 0)
+FPSLabel.Position = UDim2.new(0.1, 0, 0.1, 0) -- Vị trí dưới PingLabel, bên trái
+FPSLabel.Size = UDim2.new(0, 250, 0, 20) -- Đặt chiều rộng giống như PingLabel
 FPSLabel.Font = Enum.Font.SourceSans
 FPSLabel.TextColor3 = Color3.new(1, 1, 1)
 FPSLabel.TextSize = 14
