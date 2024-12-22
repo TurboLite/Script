@@ -1,75 +1,51 @@
--- Hàm thực thi ngay khi game bắt đầu
-local function setTeamToPirates()
-    -- Đảm bảo rằng game đã hoàn toàn tải
-    repeat wait() until game:IsLoaded()
 
-    -- Gửi yêu cầu đổi team thành Pirates
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
-end
-
--- Gọi hàm ngay khi script được chạy
-setTeamToPirates()
--- Tạo GUI để hiển thị Ping, FPS và Fruit Spawn (di chuyển được, không có Discord)
 local ScreenGui = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
+local LinkLabel = Instance.new("TextLabel")
 local PingLabel = Instance.new("TextLabel")
 local FPSLabel = Instance.new("TextLabel")
-local FruitLabel = Instance.new("TextLabel")
 
--- Đặt thuộc tính cho ScreenGui
-ScreenGui.Name = "FruitPingFPSDisplay"
+ScreenGui.Name = "PingFPSDisplay"
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Thuộc tính cho MainFrame (Khung chính để di chuyển)
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = ScreenGui
-MainFrame.BackgroundTransparency = 1 -- Trong suốt
-MainFrame.Size = UDim2.new(0, 250, 0, 100)
-MainFrame.Position = UDim2.new(0.05, 0, 0.05, 0) -- Vị trí góc trái trên
-MainFrame.Active = true
-MainFrame.Draggable = true -- Cho phép kéo
-
--- Thuộc tính cho PingLabel
+LinkLabel.Name = "LinkLabel"
+LinkLabel.Parent = ScreenGui
+LinkLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
+LinkLabel.Position = UDim2.new(0.1, 0, 0, 0) -- Di chuyển vị trí sang bên trái (0.1, 0 là 10% từ bên trái màn hình)
+LinkLabel.Size = UDim2.new(0, 250, 0, 20) -- Điều chỉnh chiều rộng (250 pixel)
+LinkLabel.Font = Enum.Font.SourceSans
+LinkLabel.TextColor3 = Color3.new(1, 1, 1)
+LinkLabel.TextSize = 14
+LinkLabel.Text = "Join: dsc.gg/meowx"
+LinkLabel.TextWrapped = true
+LinkLabel.TextScaled = false
 PingLabel.Name = "PingLabel"
-PingLabel.Parent = MainFrame
+PingLabel.Parent = ScreenGui
 PingLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
-PingLabel.Position = UDim2.new(0, 10, 0, 0)
-PingLabel.Size = UDim2.new(1, -20, 0, 20)
-PingLabel.Font = Enum.Font.SourceSans
+PingLabel.Position = UDim2.new(0.1, 0, 0.05, 0) -- Vị trí dưới LinkLabel, bên trái
+PingLabel.Size = UDim2.new(0, 250, 0, 20) -- Đặt chiều rộng giống như LinkLabel
+PingLabel.Font = Enum.Font.SourceSans -- Đặt font giống LinkLabel
 PingLabel.TextColor3 = Color3.new(1, 1, 1)
-PingLabel.TextSize = 14
-PingLabel.Text = "Ping: 0 ms"
+PingLabel.TextSize = 14 -- Đặt kích thước chữ giống LinkLabel
+PingLabel.Text = "Ping: 0 ms" -- Hiển thị "Ping: 0 ms" mặc định
 
--- Thuộc tính cho FPSLabel
 FPSLabel.Name = "FPSLabel"
-FPSLabel.Parent = MainFrame
+FPSLabel.Parent = ScreenGui
 FPSLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
-FPSLabel.Position = UDim2.new(0, 10, 0, 20)
-FPSLabel.Size = UDim2.new(1, -20, 0, 20)
+FPSLabel.Position = UDim2.new(0.1, 0, 0.1, 0) -- Vị trí dưới PingLabel, bên trái
+FPSLabel.Size = UDim2.new(0, 250, 0, 20) -- Đặt chiều rộng giống như PingLabel
 FPSLabel.Font = Enum.Font.SourceSans
 FPSLabel.TextColor3 = Color3.new(1, 1, 1)
 FPSLabel.TextSize = 14
 FPSLabel.Text = "FPS: Calculating..."
-
--- Thuộc tính cho FruitLabel
-FruitLabel.Name = "FruitLabel"
-FruitLabel.Parent = MainFrame
-FruitLabel.BackgroundTransparency = 1 -- Loại bỏ khung nền
-FruitLabel.Position = UDim2.new(0, 10, 0, 40)
-FruitLabel.Size = UDim2.new(1, -20, 0, 20)
-FruitLabel.Font = Enum.Font.SourceSans
-FruitLabel.TextColor3 = Color3.new(1, 1, 1)
-FruitLabel.TextSize = 14
-FruitLabel.Text = "Fruit Spawn: ❌" -- Mặc định không có trái cây
 
 -- Hàm cập nhật Ping
 local RunService = game:GetService("RunService")
 local function UpdatePing()
     while true do
         local pingValue = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
-        local pingNumber = tonumber(pingValue:match("([0-9]+)"))
-        PingLabel.Text = "Ping: " .. tostring(pingNumber) .. " ms"
-        wait(1)
+        local pingNumber = tonumber(pingValue:match("([0-9]+)")) -- Lấy số từ chuỗi (loại bỏ phần "ms")
+        PingLabel.Text = "Ping: " .. tostring(pingNumber) .. " ms" -- Hiển thị "Ping: giá trị ms"
+        wait(1) -- Cập nhật mỗi giây
     end
 end
 
@@ -80,38 +56,15 @@ local function UpdateFPS()
     while true do
         frameCount = frameCount + 1
         if tick() - lastTime >= 1 then
-            FPSLabel.Text = "FPS: " .. tostring(math.min(frameCount, 120))
+            FPSLabel.Text = "FPS: " .. tostring(math.min(frameCount, 120)) -- Giới hạn tối đa 120 FPS
             frameCount = 0
             lastTime = tick()
         end
-        RunService.RenderStepped:Wait()
-    end
-end
-
--- Hàm cập nhật Fruit Spawn
-local function UpdateFruitStatus()
-    local fruitsFound = false -- Biến kiểm tra trái cây
-    for _, obj in pairs(workspace:GetChildren()) do
-        if obj.Name:find("Fruit") and (obj:IsA("Tool") or obj:IsA("Model")) then
-            fruitsFound = true
-            break
-        end
-    end
-
-    if fruitsFound then
-        FruitLabel.Text = "Fruit Spawn: ✅"
-    else
-        FruitLabel.Text = "Fruit Spawn: ❌"
+        RunService.RenderStepped:Wait() -- Cập nhật mỗi frame
     end
 end
 
 -- Chạy các hàm cập nhật
-spawn(function()
-    while true do
-        UpdateFruitStatus()
-        wait(2) -- Kiểm tra trái cây mỗi 2 giây
-    end
-end)
 spawn(UpdatePing)
 spawn(UpdateFPS)
 -- Webhook
@@ -186,6 +139,10 @@ Request(Final)
 require(game.ReplicatedStorage:WaitForChild("Notification")).new(
             " <Color=Green>Turbo Lite — Auto Nhặt Trái<Color=/> "
         ):Display()
+-- Thông Báo 
+require(game.ReplicatedStorage:WaitForChild("Notification")).new(
+            " <Color=Red>Các Bạn Chọn Team Trước Khi Chạy Script !!!<Color=/> "
+        ):Display()
 -- Hàm làm tròn
 local function round(n)
     return math.floor(tonumber(n) + 0.5)
@@ -193,7 +150,7 @@ end
 
 local Number = math.random(1, 1000000)
 local DevilFruitESP = true
-local isVietnamese = true
+local isVietnamese = true -- Đặt `false` nếu người dùng là nước ngoài
 
 -- Hàm kiểm tra nil
 local function isnil(value)
@@ -241,12 +198,14 @@ function UpdateDevilChams()
     end
 end
 
+-- Tự động cập nhật ESP cho trái cây
 spawn(function()
     while wait(1) do
         UpdateDevilChams()
     end
 end)
 
+-- Mã gốc của bạn, với chức năng nhặt trái cây và thông báo:
 repeat
     wait()
 until game.IsLoaded and (game.Players.LocalPlayer or game.Players.PlayerAdded:Wait()) and
@@ -276,7 +235,8 @@ e.AngularVelocity = Vector3.new()
 e.MaxTorque = Vector3.new(1 / 0, 1 / 0, 1 / 0)
 e.Name = "bAV"
 
-local fruitsFound = false
+-- Kiểm tra xem có trái cây không
+local fruitsFound = false  -- Biến kiểm tra xem có trái cây hay không
 
 for f, f in next, workspace:GetChildren() do
     if f.Name:find("Fruit") and (f:IsA("Tool") or f:IsA("Model")) then
@@ -312,6 +272,7 @@ for f, f in next, workspace:GetChildren() do
         until f.Parent ~= workspace
         wait(1)
 
+        -- Thông báo khi đã nhặt trái
         game.StarterGui:SetCore(
             "SendNotification",
             {
@@ -352,7 +313,8 @@ if not fruitsFound then
     )
 end
 
-local serverHopNotified = false  
+-- Thông báo đổi server (hiện một lần)
+local serverHopNotified = false  -- Biến kiểm tra đã thông báo chưa
 
 local a = game.JobId
 repeat
