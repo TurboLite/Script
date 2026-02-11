@@ -592,7 +592,7 @@ _G.FarmMastery_S   = _G.FarmMastery_S or false
 
 local TweenService = game:GetService("TweenService")
 local TweenInfoBring = TweenInfo.new(
-    0.05, -- velocidade do tween
+    0.01, -- velocidade do tween
     Enum.EasingStyle.Linear,
     Enum.EasingDirection.Out
 )
