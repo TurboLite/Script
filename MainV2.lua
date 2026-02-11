@@ -584,7 +584,7 @@ _G = _G or {}
 _B = false
 PosMon = nil
 
-_G.BringRange = _G.BringRange or 350
+_G.BringRange = _G.BringRange or 250
 _G.MaxBringMobs = _G.MaxBringMobs or 20 -- LIMITE DE MOBS
 
 _G.FarmPriorityElf = _G.FarmPriorityElf or false
@@ -592,7 +592,7 @@ _G.FarmMastery_S   = _G.FarmMastery_S or false
 
 local TweenService = game:GetService("TweenService")
 local TweenInfoBring = TweenInfo.new(
-    0.25, -- velocidade do tween
+    0.15, -- velocidade do tween
     Enum.EasingStyle.Linear,
     Enum.EasingDirection.Out
 )
