@@ -1124,7 +1124,7 @@ end);
 -- =======================
 
 -- [[ VARIÁVEIS PARA O SEU INPUT ]] --
-getgenv().TweenSpeedFar = 350   -- Velocidade Padrão (Longe)
+getgenv().TweenSpeedFar = 380   -- Velocidade Padrão (Longe)
 getgenv().TweenSpeedNear = 550  -- Velocidade Boost (Perto <= 15 studs)
 
 _tp = function(I)
@@ -1151,7 +1151,7 @@ local dist = (I.Position - HRP.Position).Magnitude
 --  SE ESTIVER ATÉ 15 STUDS → USA A VELOCIDADE DE PERTO
 --  CASO CONTRÁRIO → USA A VELOCIDADE PADRÃO
 -- ===============================  
-local speed = dist <= 15 and (getgenv().TweenSpeedNear or 550) or (getgenv().TweenSpeedFar or 350)
+local speed = dist <= 15 and (getgenv().TweenSpeedNear or 550) or (getgenv().TweenSpeedFar or 380)
 
 local info = TweenInfo.new(dist / speed, Enum.EasingStyle.Linear)  
 local tween = game:GetService("TweenService"):Create(C, info, { CFrame = I })  
@@ -2308,7 +2308,7 @@ QuestNeta = function()
 			[6] = PosQ,
 		};
 	end;
-	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/farehamhz/RedzLib/main/RedzLib"))():MakeWindow({
+	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/RedzLib"))():MakeWindow({
     Title = "Turbo Lite Hub",
     SubTitle = "V2 | Blox Fruit",
     SaveFolder = "turbolite.json"
@@ -4481,8 +4481,8 @@ Setting:AddTextBox({
 Setting:AddTextBox({
     Title = "Tween Speed",
     Description = "",
-    PlaceHolder = "350",
-    Default = "350",
+    PlaceHolder = "380",
+    Default = "380",
     Callback = function(I)
         if tonumber(I) then
             getgenv().TweenSpeedFar = tonumber(I)
