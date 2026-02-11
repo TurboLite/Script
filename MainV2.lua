@@ -592,7 +592,7 @@ _G.FarmMastery_S   = _G.FarmMastery_S or false
 
 local TweenService = game:GetService("TweenService")
 local TweenInfoBring = TweenInfo.new(
-    0.15, -- velocidade do tween
+    0.10, -- velocidade do tween
     Enum.EasingStyle.Linear,
     Enum.EasingDirection.Out
 )
@@ -712,7 +712,7 @@ task.spawn(function()
             BringEnemy()
             task.wait(3)
             _B = false  
-            task.wait(5)  
+            task.wait(2)  
         else  
             _B = false  
             task.wait(1)  
