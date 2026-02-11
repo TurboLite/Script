@@ -2403,24 +2403,24 @@ local Status = Library:MakeTab({
     Icon = "rbxassetid://7040410130"
 })
 
-local Shop = Library:MakeTab({
-    Title = "Local Shop",
-    Icon = "rbxassetid://6031265976"
-})
-
 local Farm = Library:MakeTab({
     Title = "Tab Farming",
     Icon = "rbxassetid://127561653320876"
 })
 
-local Maestry = Library:MakeTab({
-    Title = "Farm Maestry",
-    Icon = "rbxassetid://10709782497"
-})
-
 local Others = Library:MakeTab({
     Title = "Farm Others",
     Icon = "rbxassetid://10723405360"
+})
+
+local Shop = Library:MakeTab({
+    Title = "Local Shop",
+    Icon = "rbxassetid://6031265976"
+})
+
+local Maestry = Library:MakeTab({
+    Title = "Farm Maestry",
+    Icon = "rbxassetid://10709782497"
 })
 
 local Event = Library:MakeTab({
@@ -2471,7 +2471,7 @@ Discord:AddDiscordInvite({
     Name = "Turbo Lite Hub",
     Description = "Join for support and updates",
     Logo = "rbxassetid://18919385586",
-    Invite = "turbolite.xyz/discord"
+    Invite = "https://turbolite.xyz/discord"
 })
 local credits = Discord:AddParagraph({
     Title = "hello, you!",
@@ -4199,8 +4199,8 @@ end
 Setting:AddSection({"Manual Save"})
 
 Setting:AddButton({
-    Name = "Salvar Configurações Agora",
-    Description = "Cria um backup manual das tuas opções atuais",
+    Name = "Salvar Config UI",
+    Description = "",
     Callback = function()
         -- Verifica se a função existe antes de chamar
         if SaveSettings then
@@ -4209,18 +4209,18 @@ Setting:AddButton({
             -- Notificação Universal (Funciona sem a lib Fluent)
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Turbo Lite Hub",
-                Text = "Configurações salvas com sucesso!",
+                Text = "Done",
                 Duration = 5
             })
         else
-            warn("Erro: Função SaveSettings não encontrada!")
+            warn("Erro!")
         end
     end
 })
 
 Setting:AddButton({
-    Name = "Resetar Configurações",
-    Description = "Apaga o ficheiro de save e volta ao padrão",
+    Name = "Resetar Config UI",
+    Description = "",
     Callback = function()
         -- Usa a variável FullPath que foi definida lá no topo do script
         if isfile and isfile(FullPath) then
@@ -4230,13 +4230,13 @@ Setting:AddButton({
             -- Notificação Universal
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Turbo Lite Hub",
-                Text = "Configurações resetadas! Re-execute o script.",
+                Text = "Done",
                 Duration = 5
             })
         else
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Turbo Lite Hub",
-                Text = "Nenhum arquivo de save encontrado para apagar.",
+                Text = "Done",
                 Duration = 3
             })
         end
@@ -4654,7 +4654,7 @@ Others:AddDropdown({
 -- 3. TOGGLE AUTO BUY BAIT
 Others:AddToggle({
     Name = "Auto Buy Bait",
-    Description = "Crafta a isca selecionada automaticamente",
+    Description = "",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoBuyBait", false),
     Callback = function(Value)
@@ -4684,7 +4684,7 @@ end)
 -- 4. TOGGLE AUTO FISHING (CAST/CATCH)
 Others:AddToggle({
     Name = "Auto Fishing",
-    Description = "Lança e puxa a vara automaticamente",
+    Description = "",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoFishing", false),
     Callback = function(Value)
@@ -4759,7 +4759,7 @@ end)
 -- 5. AUTO QUEST FISHING
 Others:AddToggle({
     Name = "Auto Quest Fishing",
-    Description = "Pega missão com o NPC Angler",
+    Description = "",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoQuest", false),
     Callback = function(Value)
@@ -4796,7 +4796,7 @@ end)
 -- 6. AUTO COMPLETE QUEST
 Others:AddToggle({
     Name = "Auto Complete Quest",
-    Description = "Entrega a quest automaticamente",
+    Description = "",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoComplete", false),
     Callback = function(Value)
@@ -4826,7 +4826,7 @@ end)
 -- 7. AUTO SELL FISH
 Others:AddToggle({
     Name = "Auto Sell Fish",
-    Description = "Vende peixes automaticamente",
+    Description = "",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoSell", false),
     Callback = function(Value)
@@ -4856,7 +4856,7 @@ end)
 -- 8. AUTO SPAM SKILL Z
 Others:AddToggle({
     Name = "Auto use skill of the rod",
-    Description = "Spamma a skill Z da ferramenta equipada",
+    Description = "",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoSkillZ", false),
     Callback = function(Value)
@@ -11437,7 +11437,7 @@ Fruit:AddSection({"Raid Farming"});
 
 Fruit:AddToggle({
 	Name  = "Auto Start Raid",
-    Description = "Inicia a Raid automaticamente e aguarda 10s entre verificações",
+    Description = "",
     Default = false,
     Callback = function(I)
         _G.Auto_StartRaid = I;
