@@ -584,15 +584,15 @@ _G = _G or {}
 _B = false
 PosMon = nil
 
-_G.BringRange = _G.BringRange or 235
-_G.MaxBringMobs = _G.MaxBringMobs or 10 -- LIMITE DE MOBS
+_G.BringRange = _G.BringRange or 350
+_G.MaxBringMobs = _G.MaxBringMobs or 20 -- LIMITE DE MOBS
 
 _G.FarmPriorityElf = _G.FarmPriorityElf or false
 _G.FarmMastery_S   = _G.FarmMastery_S or false
 
 local TweenService = game:GetService("TweenService")
 local TweenInfoBring = TweenInfo.new(
-    0.45, -- velocidade do tween
+    0.25, -- velocidade do tween
     Enum.EasingStyle.Linear,
     Enum.EasingDirection.Out
 )
@@ -1124,7 +1124,7 @@ end);
 -- =======================
 
 -- [[ VARIÁVEIS PARA O SEU INPUT ]] --
-getgenv().TweenSpeedFar = 380   -- Velocidade Padrão (Longe)
+getgenv().TweenSpeedFar = 390   -- Velocidade Padrão (Longe)
 getgenv().TweenSpeedNear = 550  -- Velocidade Boost (Perto <= 15 studs)
 
 _tp = function(I)
@@ -1151,7 +1151,7 @@ local dist = (I.Position - HRP.Position).Magnitude
 --  SE ESTIVER ATÉ 15 STUDS → USA A VELOCIDADE DE PERTO
 --  CASO CONTRÁRIO → USA A VELOCIDADE PADRÃO
 -- ===============================  
-local speed = dist <= 15 and (getgenv().TweenSpeedNear or 550) or (getgenv().TweenSpeedFar or 380)
+local speed = dist <= 15 and (getgenv().TweenSpeedNear or 550) or (getgenv().TweenSpeedFar or 390)
 
 local info = TweenInfo.new(dist / speed, Enum.EasingStyle.Linear)  
 local tween = game:GetService("TweenService"):Create(C, info, { CFrame = I })  
