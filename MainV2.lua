@@ -585,14 +585,14 @@ _B = false
 PosMon = nil
 
 _G.BringRange = _G.BringRange or 250
-_G.MaxBringMobs = _G.MaxBringMobs or 50 -- LIMITE DE MOBS
+_G.MaxBringMobs = _G.MaxBringMobs or 30 -- LIMITE DE MOBS
 
 _G.FarmPriorityElf = _G.FarmPriorityElf or false
 _G.FarmMastery_S   = _G.FarmMastery_S or false
 
 local TweenService = game:GetService("TweenService")
 local TweenInfoBring = TweenInfo.new(
-    0.01, -- velocidade do tween
+    0.1, -- velocidade do tween
     Enum.EasingStyle.Linear,
     Enum.EasingDirection.Out
 )
@@ -1124,8 +1124,8 @@ end);
 -- =======================
 
 -- [[ VARIÁVEIS PARA O SEU INPUT ]] --
-getgenv().TweenSpeedFar = 370   -- Velocidade Padrão (Longe)
-getgenv().TweenSpeedNear = 550  -- Velocidade Boost (Perto <= 15 studs)
+getgenv().TweenSpeedFar = 350   -- Velocidade Padrão (Longe)
+getgenv().TweenSpeedNear = 370  -- Velocidade Boost (Perto <= 15 studs)
 
 _tp = function(I)
 local e = plr.Character;
@@ -1151,7 +1151,7 @@ local dist = (I.Position - HRP.Position).Magnitude
 --  SE ESTIVER ATÉ 15 STUDS → USA A VELOCIDADE DE PERTO
 --  CASO CONTRÁRIO → USA A VELOCIDADE PADRÃO
 -- ===============================  
-local speed = dist <= 15 and (getgenv().TweenSpeedNear or 550) or (getgenv().TweenSpeedFar or 370)
+local speed = dist <= 15 and (getgenv().TweenSpeedNear or 350) or (getgenv().TweenSpeedFar or 350)
 
 local info = TweenInfo.new(dist / speed, Enum.EasingStyle.Linear)  
 local tween = game:GetService("TweenService"):Create(C, info, { CFrame = I })  
@@ -3146,6 +3146,33 @@ Farm:AddDropdown({
 })
 
 Farm:AddToggle({
+	Name = "Fast Attack",
+	Description = "",
+	-- 1. Carrega o estado salvo ou inicia como true (padrão original)
+	Default = GetSetting("AutoAttack_Save", true),
+	Callback = function(I)
+		_G.Seriality = I
+        -- 2. Salva
+        _G.SaveData["AutoAttack_Save"] = I
+        SaveSettings()
+	end,
+})
+
+Farm:AddToggle({
+	Name = "Bring Mobs",
+	Description = "",
+	-- 1. Carrega o estado salvo ou inicia como true
+	Default = GetSetting("BringMobs_Save", true),
+	Callback = function(I)
+		_B = I
+        -- 2. Salva
+        _G.SaveData["BringMobs_Save"] = I
+        SaveSettings()
+	end,
+})
+
+
+Farm:AddToggle({
     Name = "Start Farm",
     Default = GetSetting("StartFarm_Save", false),
     Callback = function(v)
@@ -4290,32 +4317,6 @@ Setting:AddButton({
 })
 
 Setting:AddToggle({
-	Name = "Auto Attack",
-	Description = "",
-	-- 1. Carrega o estado salvo ou inicia como true (padrão original)
-	Default = GetSetting("AutoAttack_Save", true),
-	Callback = function(I)
-		_G.Seriality = I
-        -- 2. Salva
-        _G.SaveData["AutoAttack_Save"] = I
-        SaveSettings()
-	end,
-})
-
-Setting:AddToggle({
-	Name = "Bring Mobs",
-	Description = "",
-	-- 1. Carrega o estado salvo ou inicia como true
-	Default = GetSetting("BringMobs_Save", true),
-	Callback = function(I)
-		_B = I
-        -- 2. Salva
-        _G.SaveData["BringMobs_Save"] = I
-        SaveSettings()
-	end,
-})
-
-Setting:AddToggle({
 	Name = "Safe Mode",
 	Description = "turn on for safe ur health if low",
 	-- 1. Carrega o estado salvo
@@ -4481,8 +4482,8 @@ Setting:AddTextBox({
 Setting:AddTextBox({
     Title = "Tween Speed",
     Description = "",
-    PlaceHolder = "370",
-    Default = "370",
+    PlaceHolder = "350",
+    Default = "350",
     Callback = function(I)
         if tonumber(I) then
             getgenv().TweenSpeedFar = tonumber(I)
