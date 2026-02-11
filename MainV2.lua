@@ -12,98 +12,11 @@ local Services = setmetatable({}, {
     end
 })
 
-local function NotificacaoNightMystic(titulo, mensagem)
-    local success = pcall(function()
-        local TweenService = Services.TweenService
-        local CoreGui = Services.CoreGui
-        local LogoID = "rbxassetid://18919385586"
-
-        local ScreenGui = Instance.new("ScreenGui")
-        ScreenGui.Name = "NM_Notify"
-        ScreenGui.ResetOnSpawn = false
-        ScreenGui.Parent = CoreGui
-        
-        local Frame = Instance.new("Frame")
-        Frame.Parent = ScreenGui
-        Frame.BackgroundColor3 = Color3.fromRGB(8, 8, 8)
-        Frame.Position = UDim2.new(1, 20, 0.85, 0)
-        Frame.Size = UDim2.new(0, 280, 0, 65)
-        Frame.BorderSizePixel = 0
-        
-        local UICorner = Instance.new("UICorner")
-        UICorner.CornerRadius = UDim.new(0, 10)
-        UICorner.Parent = Frame
-        
-        local UIStroke = Instance.new("UIStroke")
-        UIStroke.Parent = Frame
-        UIStroke.Color = Color3.fromRGB(45, 45, 45)
-        UIStroke.Thickness = 1
-
-        local Logo = Instance.new("ImageLabel")
-        Logo.Parent = Frame
-        Logo.BackgroundTransparency = 1
-        Logo.Position = UDim2.new(0, 10, 0, 10)
-        Logo.Size = UDim2.new(0, 45, 0, 45)
-        Logo.Image = LogoID
-        Logo.ScaleType = Enum.ScaleType.Fit
-
-        local Title = Instance.new("TextLabel")
-        Title.Parent = Frame
-        Title.BackgroundTransparency = 1
-        Title.Position = UDim2.new(0, 65, 0, 12)
-        Title.Size = UDim2.new(1, -70, 0, 20)
-        Title.Font = Enum.Font.GothamBold
-        Title.Text = titulo
-        Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Title.TextSize = 14
-        Title.TextXAlignment = Enum.TextXAlignment.Left
-        Title.TextTruncate = Enum.TextTruncate.AtEnd
-
-        local Msg = Instance.new("TextLabel")
-        Msg.Parent = Frame
-        Msg.BackgroundTransparency = 1
-        Msg.Position = UDim2.new(0, 65, 0, 32)
-        Msg.Size = UDim2.new(1, -70, 0, 20)
-        Msg.Font = Enum.Font.GothamMedium
-        Msg.Text = mensagem
-        Msg.TextColor3 = Color3.fromRGB(200, 200, 200)
-        Msg.TextSize = 12
-        Msg.TextXAlignment = Enum.TextXAlignment.Left
-        Msg.TextTruncate = Enum.TextTruncate.AtEnd
-        
-        local tweenIn = TweenService:Create(
-            Frame, 
-            TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-            {Position = UDim2.new(1, -300, 0.85, 0)}
-        )
-        tweenIn:Play()
-
-        task.delay(10, function()
-            if Frame and Frame.Parent then
-                local tweenOut = TweenService:Create(
-                    Frame,
-                    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
-                    {Position = UDim2.new(1, 20, 0.85, 0)}
-                )
-                tweenOut:Play()
-                tweenOut.Completed:Wait()
-                ScreenGui:Destroy()
-            end
-        end)
-    end)
-    
-    if not success then
-        warn("[Abacaxi] Erro ao exibir notificação")
-    end
-end
-
-NotificacaoNightMystic("Abacaxi Hub", "Script carregado com sucesso!")
-
 -- ========================================
 -- SAVE SYSTEM (Optimized)
 -- ========================================
 local HttpService = Services.HttpService
-local FolderName = "Abacaxi Hub"
+local FolderName = "Turbo Lite Hub"
 local FileName = "Settings.json"
 local FullPath = FolderName .. "/" .. FileName
 
@@ -2398,7 +2311,7 @@ QuestNeta = function()
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/farehamhz/RedzLib/main/RedzLib"))():MakeWindow({
     Title = "Turbo Lite Hub",
     SubTitle = "V2 | Blox Fruit",
-    SaveFolder = "abacaxi.json"
+    SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
 local screenGui = Instance.new("ScreenGui")
@@ -2561,10 +2474,9 @@ Discord:AddDiscordInvite({
     Invite = "turbolite.xyz/discord"
 })
 local credits = Discord:AddParagraph({
-    Title = "Credits For Someone Peoples",
+    Title = "hello, you!",
     Desc = ""
 })
-credits:SetDesc("Hello World")
 
 Shop:AddSection("Fighting Shop")
 Shop:AddButton({
@@ -4296,7 +4208,7 @@ Setting:AddButton({
             
             -- Notificação Universal (Funciona sem a lib Fluent)
             game.StarterGui:SetCore("SendNotification", {
-                Title = "Abacaxi Hub",
+                Title = "Turbo Lite Hub",
                 Text = "Configurações salvas com sucesso!",
                 Duration = 5
             })
@@ -4317,13 +4229,13 @@ Setting:AddButton({
             
             -- Notificação Universal
             game.StarterGui:SetCore("SendNotification", {
-                Title = "Abacaxi Hub",
+                Title = "Turbo Lite Hub",
                 Text = "Configurações resetadas! Re-execute o script.",
                 Duration = 5
             })
         else
             game.StarterGui:SetCore("SendNotification", {
-                Title = "Abacaxi Hub",
+                Title = "Turbo Lite Hub",
                 Text = "Nenhum arquivo de save encontrado para apagar.",
                 Duration = 3
             })
