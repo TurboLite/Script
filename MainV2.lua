@@ -6015,7 +6015,7 @@ task.spawn(function()
                                 MousePos = e.HumanoidRootPart.Position
                                 if CheckF() then
                                     -- Se estiver transformado, foca só em Blox Fruit
-                                    ExecuteSkills("Blox Fruit")
+                                    ExecuteSkills("Melee")
                                 else
                                     -- Sequência completa: Melee -> Sword -> Fruit -> Gun
                                     ExecuteSkills("Melee")
@@ -6043,7 +6043,7 @@ task.spawn(function()
                             if plr:DistanceFromCharacter(e.HumanoidRootPart.CFrame.Position) <= 500 then
                                 MousePos = segment.Position
                                 if CheckF() then
-                                    ExecuteSkills("Blox Fruit")
+                                    ExecuteSkills("Melee")
                                 else
                                     ExecuteSkills("Melee")
                                     ExecuteSkills("Sword")
@@ -7131,7 +7131,7 @@ Maestry:AddSection({"Mastery"})
 
 local islands = { "Cake", "Bone" }
 Maestry:AddDropdown({
-    Title = "Select Método",
+    Title = "Select Method",
     Description = "",
     Options= islands,
     Default = "Cake",
