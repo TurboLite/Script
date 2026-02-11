@@ -590,7 +590,12 @@ _G.MaxBringMobs = _G.MaxBringMobs or 50 -- LIMITE DE MOBS
 _G.FarmPriorityElf = _G.FarmPriorityElf or false
 _G.FarmMastery_S   = _G.FarmMastery_S or false
 
-
+local TweenService = game:GetService("TweenService")
+local TweenInfoBring = TweenInfo.new(
+    0.01, -- velocidade do tween
+    Enum.EasingStyle.Linear,
+    Enum.EasingDirection.Out
+)
 
 --==================================================
 -- FUNÇÃO: VERIFICA SE QUALQUER FARM ESTÁ ATIVO
