@@ -2308,7 +2308,7 @@ QuestNeta = function()
 			[6] = PosQ,
 		};
 	end;
-	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/RedzLib"))():MakeWindow({
+	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
     SubTitle = "V2 | Blox Fruit",
     SaveFolder = "turbolite.json"
