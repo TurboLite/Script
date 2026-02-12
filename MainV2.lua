@@ -682,7 +682,7 @@ BringEnemy = function()
             local dist = (root.Position - targetPos).Magnitude  
 
             if dist <= _G.BringRange and not root:GetAttribute("Tweening") then  
-                count += 2  
+                count += 3  
                 root:SetAttribute("Tweening", true)  
 
                 local tween = TweenService:Create(  
