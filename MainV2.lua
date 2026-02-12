@@ -4017,230 +4017,7 @@ spawn(function()
     end
 end)
 end
-Farm:AddSection({"Collect"})
--- Botão Auto Collect Chest
-Farm:AddToggle({
-    Name = "Auto Collect Chest",
-    Description = "",
-    -- 1. Carrega o estado salvo (ou false por padrão)
-    Default = GetSetting("AutoFarmChest_Save", false),
-    Callback = function(I)
-        _G.AutoFarmChest = I
-        
-        -- 2. Guarda na tabela de salvamento
-        _G.SaveData["AutoFarmChest_Save"] = I
-        
-        -- 3. Salva no arquivo Settings.json
-        SaveSettings()
-    end,
-})
 
--- Botão Auto Collect Berry
-Farm:AddToggle({
-	Name = "Auto Collect Berry",
-	Description = "",
-	-- 1. Carrega o estado salvo
-	Default = GetSetting("AutoBerry_Save", false),
-	Callback = function(I)
-		_G.AutoBerry = I
-        
-        -- 2. Guarda na tabela de salvamento
-        _G.SaveData["AutoBerry_Save"] = I
-        
-        -- 3. Salva no arquivo
-        SaveSettings()
-	end,
-});
-
-spawn(function()
-	while wait(Sec) do
-		if _G.AutoBerry then
-			local I = game:GetService("CollectionService");
-			local e = game:GetService("Players");
-			local K = e.LocalPlayer;
-			local n = I:GetTagged("BerryBush");
-			local d, z = math.huge;
-			for I = 1, #n, 1 do
-				local e = n[I];
-				for I, K in pairs(e:GetAttributes()) do
-					if not BerryArray or table.find(BerryArray, K) then
-						_tp(e.Parent:GetPivot());
-						for I = 1, #n, 1 do
-							local e = n[I];
-							for I, e in pairs(e:GetChildren()) do
-								if not BerryArray or table.find(BerryArray, e) then
-									_tp(e.WorldPivot);
-									fireproximityprompt(e.ProximityPrompt, math.huge);
-								end;
-							end;
-						end;
-					end;
-				end;
-			end;
-		end;
-	end;
-end);
-
-spawn(function()
-    while wait(Sec) do
-        if _G.AutoFarmChest then
-            pcall(function()
-                local CollectionService = game:GetService("CollectionService")
-                local Players = game:GetService("Players")
-                local plrChar = Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait()
-                local d = plrChar:GetPivot().Position
-                local Chests = CollectionService:GetTagged("_ChestTagged")
-                local minDist, nearestChest = math.huge, nil
-                for _, chest in pairs(Chests) do
-                    local dist = (chest:GetPivot().Position - d).Magnitude
-                    if not SelectedIsland or chest:IsDescendantOf(SelectedIsland) then
-                        if not chest:GetAttribute("IsDisabled") and dist < minDist then
-                            minDist = dist
-                            nearestChest = chest
-                        end
-                    end
-                end
-                if nearestChest then
-                    _tp(nearestChest:GetPivot())
-                end
-            end)
-        end
-    end
-end)
-Farm:AddSection({"Material"})
--- Dropdown de Selecionar Material
-Farm:AddDropdown({
-	Name = "Select Material",
-	Description = "",
-	Options = MaterialList,
-	-- 1. Carrega o material salvo ou deixa vazio se for a primeira vez
-	Default = GetSetting("SelectMaterial_Save", nil),
-	Multi = false,
-	Callback = function(I)
-		(getgenv()).SelectMaterial = I
-        
-        -- 2. Salva o material escolhido
-        _G.SaveData["SelectMaterial_Save"] = I
-        SaveSettings()
-	end,
-})
-
--- Toggle de Auto Farm (Material)
-Farm:AddToggle({
-	Name = "Auto Farm",
-	Description = "",
-	-- 1. Carrega se o farm de material estava ligado
-	Default = GetSetting("AutoMaterial_Save", false),
-	Callback = function(I)
-		(getgenv()).AutoMaterial = I
-        
-        -- 2. Salva o estado do toggle
-        _G.SaveData["AutoMaterial_Save"] = I
-        SaveSettings()
-	end,
-})
-
-spawn(function()
-	local function I(I, e)
-		if I:FindFirstChild("Humanoid") and (I:FindFirstChild("HumanoidRootPart") and I.Humanoid.Health > 0) then
-			if I.Name == e then
-				repeat
-					wait();
-					G.Kill(I, (getgenv()).AutoMaterial);
-				until not (getgenv()).AutoMaterial or not I.Parent or I.Humanoid.Health <= 0;
-			end;
-		end;
-	end;
-	local function e()
-		for I, e in pairs((game:GetService("Workspace"))._WorldOrigin.EnemySpawns:GetChildren()) do
-			for I, K in ipairs(MMon) do
-				if string.find(e.Name, K) then
-					if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - e.Position).Magnitude >= 10 then
-						_tp(e.CFrame * Pos);
-					end;
-				end;
-			end;
-		end;
-	end;
-	while wait() do
-		if (getgenv()).AutoMaterial then
-			pcall(function()
-				if (getgenv()).SelectMaterial then
-					MaterialMon((getgenv()).SelectMaterial);
-					_tp(MPos);
-				end;
-				for e, K in ipairs(MMon) do
-					for e, n in pairs(workspace.Enemies:GetChildren()) do
-						I(n, K);
-					end;
-				end;
-				e();
-			end);
-		end;
-	end;
-end);
-
-if World3 then
-Farm:AddSection({"Bones"})
--- AUTO RANDOM BONES
-Farm:AddToggle({
-    Name = "Auto Random Bone",
-    Default = false,
-    Callback = function(v)
-        _G.Auto_Random_Bone = v
-    end,
-})
-
-spawn(function()
-    while wait(Sec) do
-        if _G.Auto_Random_Bone then
-            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
-        end
-    end
-end)
-
--- AUTO SOUL REAPER
-Farm:AddToggle({
-    Name = "Auto Soul Reaper",
-    Default = false,
-    Callback = function(v)
-        _G.AutoHytHallow = v
-    end,
-})
-
-spawn(function()
-    while wait(Sec) do
-        if _G.AutoHytHallow then
-            pcall(function()
-
-                local mob = GetConnectionEnemies("Soul Reaper")
-
-                if mob then
-                    repeat task.wait()
-                        G.Kill(mob,_G.AutoHytHallow)
-                    until mob.Humanoid.Health <= 0 or not _G.AutoHytHallow
-
-                else
-                    if not GetBP("Hallow Essence") then
-                        repeat task.wait(.1)
-                            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
-                        until not _G.AutoHytHallow or GetBP("Hallow Essence")
-                    else
-                        local pos = CFrame.new(-8932.32,146.83,6062.55)
-                        repeat wait(.1)
-                            _tp(pos)
-                        until not _G.AutoHytHallow or plr.Character.HumanoidRootPart.CFrame == pos
-                        EquipWeapon("Hallow Essence")
-                    end
-                end
-
-            end)
-        end
-    end
-end)
-end
-if World3 then
-Farm:AddSection({"Dark Dragger + Valkyrie"})
 Farm:AddToggle({
     Name = "Auto Kill Rip Indra",
     Description = "",
@@ -4331,6 +4108,230 @@ spawn(function()
 	end;
 end);
 end
+Farm:AddSection({"Collect"})
+-- Botão Auto Collect Chest
+Farm:AddToggle({
+    Name = "Auto Collect Chest",
+    Description = "",
+    -- 1. Carrega o estado salvo (ou false por padrão)
+    Default = GetSetting("AutoFarmChest_Save", false),
+    Callback = function(I)
+        _G.AutoFarmChest = I
+        
+        -- 2. Guarda na tabela de salvamento
+        _G.SaveData["AutoFarmChest_Save"] = I
+        
+        -- 3. Salva no arquivo Settings.json
+        SaveSettings()
+    end,
+})
+
+-- Botão Auto Collect Berry
+Farm:AddToggle({
+	Name = "Auto Collect Berry",
+	Description = "",
+	-- 1. Carrega o estado salvo
+	Default = GetSetting("AutoBerry_Save", false),
+	Callback = function(I)
+		_G.AutoBerry = I
+        
+        -- 2. Guarda na tabela de salvamento
+        _G.SaveData["AutoBerry_Save"] = I
+        
+        -- 3. Salva no arquivo
+        SaveSettings()
+	end,
+});
+
+spawn(function()
+	while wait(Sec) do
+		if _G.AutoBerry then
+			local I = game:GetService("CollectionService");
+			local e = game:GetService("Players");
+			local K = e.LocalPlayer;
+			local n = I:GetTagged("BerryBush");
+			local d, z = math.huge;
+			for I = 1, #n, 1 do
+				local e = n[I];
+				for I, K in pairs(e:GetAttributes()) do
+					if not BerryArray or table.find(BerryArray, K) then
+						_tp(e.Parent:GetPivot());
+						for I = 1, #n, 1 do
+							local e = n[I];
+							for I, e in pairs(e:GetChildren()) do
+								if not BerryArray or table.find(BerryArray, e) then
+									_tp(e.WorldPivot);
+									fireproximityprompt(e.ProximityPrompt, math.huge);
+								end;
+							end;
+						end;
+					end;
+				end;
+			end;
+		end;
+	end;
+end);
+
+spawn(function()
+    while wait(Sec) do
+        if _G.AutoFarmChest then
+            pcall(function()
+                local CollectionService = game:GetService("CollectionService")
+                local Players = game:GetService("Players")
+                local plrChar = Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait()
+                local d = plrChar:GetPivot().Position
+                local Chests = CollectionService:GetTagged("_ChestTagged")
+                local minDist, nearestChest = math.huge, nil
+                for _, chest in pairs(Chests) do
+                    local dist = (chest:GetPivot().Position - d).Magnitude
+                    if not SelectedIsland or chest:IsDescendantOf(SelectedIsland) then
+                        if not chest:GetAttribute("IsDisabled") and dist < minDist then
+                            minDist = dist
+                            nearestChest = chest
+                        end
+                    end
+                end
+                if nearestChest then
+                    _tp(nearestChest:GetPivot())
+                end
+            end)
+        end
+    end
+end)
+
+
+if World3 then
+Farm:AddSection({"Bones"})
+-- AUTO RANDOM BONES
+Farm:AddToggle({
+    Name = "Auto Random Bone",
+    Default = false,
+    Callback = function(v)
+        _G.Auto_Random_Bone = v
+    end,
+})
+
+spawn(function()
+    while wait(Sec) do
+        if _G.Auto_Random_Bone then
+            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
+        end
+    end
+end)
+
+-- AUTO SOUL REAPER
+Farm:AddToggle({
+    Name = "Auto Soul Reaper",
+    Default = false,
+    Callback = function(v)
+        _G.AutoHytHallow = v
+    end,
+})
+
+spawn(function()
+    while wait(Sec) do
+        if _G.AutoHytHallow then
+            pcall(function()
+
+                local mob = GetConnectionEnemies("Soul Reaper")
+
+                if mob then
+                    repeat task.wait()
+                        G.Kill(mob,_G.AutoHytHallow)
+                    until mob.Humanoid.Health <= 0 or not _G.AutoHytHallow
+
+                else
+                    if not GetBP("Hallow Essence") then
+                        repeat task.wait(.1)
+                            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
+                        until not _G.AutoHytHallow or GetBP("Hallow Essence")
+                    else
+                        local pos = CFrame.new(-8932.32,146.83,6062.55)
+                        repeat wait(.1)
+                            _tp(pos)
+                        until not _G.AutoHytHallow or plr.Character.HumanoidRootPart.CFrame == pos
+                        EquipWeapon("Hallow Essence")
+                    end
+                end
+
+            end)
+        end
+    end
+end)
+end
+Farm:AddSection({"Material"})
+-- Dropdown de Selecionar Material
+Farm:AddDropdown({
+	Name = "Select Material",
+	Description = "",
+	Options = MaterialList,
+	-- 1. Carrega o material salvo ou deixa vazio se for a primeira vez
+	Default = GetSetting("SelectMaterial_Save", nil),
+	Multi = false,
+	Callback = function(I)
+		(getgenv()).SelectMaterial = I
+        
+        -- 2. Salva o material escolhido
+        _G.SaveData["SelectMaterial_Save"] = I
+        SaveSettings()
+	end,
+})
+
+-- Toggle de Auto Farm (Material)
+Farm:AddToggle({
+	Name = "Auto Farm",
+	Description = "",
+	-- 1. Carrega se o farm de material estava ligado
+	Default = GetSetting("AutoMaterial_Save", false),
+	Callback = function(I)
+		(getgenv()).AutoMaterial = I
+        
+        -- 2. Salva o estado do toggle
+        _G.SaveData["AutoMaterial_Save"] = I
+        SaveSettings()
+	end,
+})
+
+spawn(function()
+	local function I(I, e)
+		if I:FindFirstChild("Humanoid") and (I:FindFirstChild("HumanoidRootPart") and I.Humanoid.Health > 0) then
+			if I.Name == e then
+				repeat
+					wait();
+					G.Kill(I, (getgenv()).AutoMaterial);
+				until not (getgenv()).AutoMaterial or not I.Parent or I.Humanoid.Health <= 0;
+			end;
+		end;
+	end;
+	local function e()
+		for I, e in pairs((game:GetService("Workspace"))._WorldOrigin.EnemySpawns:GetChildren()) do
+			for I, K in ipairs(MMon) do
+				if string.find(e.Name, K) then
+					if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - e.Position).Magnitude >= 10 then
+						_tp(e.CFrame * Pos);
+					end;
+				end;
+			end;
+		end;
+	end;
+	while wait() do
+		if (getgenv()).AutoMaterial then
+			pcall(function()
+				if (getgenv()).SelectMaterial then
+					MaterialMon((getgenv()).SelectMaterial);
+					_tp(MPos);
+				end;
+				for e, K in ipairs(MMon) do
+					for e, n in pairs(workspace.Enemies:GetChildren()) do
+						I(n, K);
+					end;
+				end;
+				e();
+			end);
+		end;
+	end;
+end);
+
 Setting:AddSection({"Manual Save"})
 
 Setting:AddButton({
