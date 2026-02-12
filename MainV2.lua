@@ -2310,7 +2310,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "V2 | Test 5",
+    SubTitle = "V2 | Test 6",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -2393,13 +2393,9 @@ imageButton.MouseButton1Click:Connect(function()
         Library:Minimize(true)
     end
 end)
-local Discord = Library:MakeTab({
-    Title = "Information",
-    Icon = "rbxassetid://73132811772878"
-})
 
 local Status = Library:MakeTab({
-    Title = "Status & Server",
+    Title = "Info & Server",
     Icon = "rbxassetid://7040410130"
 })
 
@@ -2467,15 +2463,11 @@ local Setting = Library:MakeTab({
     Title = "Settings & Misc",
     Icon = "rbxassetid://7734053495"
 })
-Discord:AddDiscordInvite({
-    Name = "Turbo Lite Hub",
+Status:AddDiscordInvite({
+    Name = "Turbo Lite Hub Server",
     Description = "Join for support and updates",
     Logo = "rbxassetid://18919385586",
     Invite = "https://turbolite.xyz/discord"
-})
-local credits = Discord:AddParagraph({
-    Title = "hello, you!",
-    Desc = ""
 })
 
 Shop:AddSection("Fighting Shop")
