@@ -585,14 +585,14 @@ _B = false
 PosMon = nil
 
 _G.BringRange = _G.BringRange or 250
-_G.MaxBringMobs = _G.MaxBringMobs or 30 -- LIMITE DE MOBS
+_G.MaxBringMobs = _G.MaxBringMobs or 50 -- LIMITE DE MOBS
 
 _G.FarmPriorityElf = _G.FarmPriorityElf or false
 _G.FarmMastery_S   = _G.FarmMastery_S or false
 
 local TweenService = game:GetService("TweenService")
 local TweenInfoBring = TweenInfo.new(
-    0.1, -- velocidade do tween
+    0.10, -- velocidade do tween
     Enum.EasingStyle.Linear,
     Enum.EasingDirection.Out
 )
@@ -682,7 +682,7 @@ BringEnemy = function()
             local dist = (root.Position - targetPos).Magnitude  
 
             if dist <= _G.BringRange and not root:GetAttribute("Tweening") then  
-                count += 1  
+                count += 2  
                 root:SetAttribute("Tweening", true)  
 
                 local tween = TweenService:Create(  
@@ -3216,16 +3216,6 @@ Farm:AddToggle({
 })
 
 Farm:AddToggle({
-    Title = "Auto Bone",
-    Default = GetSetting("StartFarm_Save", false),
-    Callback = function(v)
-        _G.AutoFarm_Bone = v
-        _G.SaveData["StartFarm_Save"] = v
-        SaveSettings()
-    end
-})
-
-Farm:AddToggle({
     Title = "Accept Quests",
     Default = GetSetting("AcceptQuest_Save", false),
     Callback = function(v)
@@ -4480,7 +4470,7 @@ Setting:AddSection({"Select"})
 Setting:AddTextBox({
     Title = "Bring Mobs Range",
     Description = "",
-    PlaceHolder = "235",
+    PlaceHolder = "250",
     Default = tostring(_G.BringRange),
     Callback = function(Value)
         local num = tonumber(Value)
