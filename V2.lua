@@ -1195,7 +1195,7 @@ end);
 -- =======================
 
 -- [[ VARIÁVEIS PARA O SEU INPUT ]] --
-getgenv().TweenSpeedFar = 350   -- Velocidade Padrão (Longe)
+getgenv().TweenSpeedFar = 370   -- Velocidade Padrão (Longe)
 getgenv().TweenSpeedNear = 370  -- Velocidade Boost (Perto <= 15 studs)
 
 _tp = function(I)
@@ -1222,7 +1222,7 @@ local dist = (I.Position - HRP.Position).Magnitude
 --  SE ESTIVER ATÉ 15 STUDS → USA A VELOCIDADE DE PERTO
 --  CASO CONTRÁRIO → USA A VELOCIDADE PADRÃO
 -- ===============================  
-local speed = dist <= 15 and (getgenv().TweenSpeedNear or 350) or (getgenv().TweenSpeedFar or 350)
+local speed = dist <= 15 and (getgenv().TweenSpeedNear or 370) or (getgenv().TweenSpeedFar or 370)
 
 local info = TweenInfo.new(dist / speed, Enum.EasingStyle.Linear)  
 local tween = game:GetService("TweenService"):Create(C, info, { CFrame = I })  
@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 4",
+    SubTitle = "UI V2 | Test 5",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -3212,20 +3212,8 @@ Farm:AddToggle({
 	end,
 })
 
-Farm:AddButton({ Name = "Fps Boost", Description = "giảm lag", Callback = function()
-		LowCpu();
-	end });
-local V5 = game.Players.LocalPlayer;
-local function y5(I)
-	if not I then
-		return false;
-	end;
-	local e = I:FindFirstChild("Humanoid");
-	return e and e.Health > 0;
-end
-
 Farm:AddToggle({
-	Name = "Bring Mobs",
+	Name = "Bring Mob",
 	Description = "gom quái",
 	-- 1. Carrega o estado salvo ou inicia como true
 	Default = GetSetting("BringMobs_Save", true),
@@ -3236,6 +3224,18 @@ Farm:AddToggle({
         SaveSettings()
 	end,
 })
+
+Farm:AddButton({ Name = "Fps Fix Lag", Description = "giảm lag", Callback = function()
+		LowCpu();
+	end });
+local V5 = game.Players.LocalPlayer;
+local function y5(I)
+	if not I then
+		return false;
+	end;
+	local e = I:FindFirstChild("Humanoid");
+	return e and e.Health > 0;
+end
 
 Farm:AddSection({"Auto Farm"})
 Farm:AddDropdown({
@@ -3832,7 +3832,7 @@ if World3 then
                         end
 
                         -- TWEEN
-                        local targetCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+                        local targetCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
                         local distance = (hrp.Position - targetCFrame.Position).Magnitude
                         local speed = 350
                         local time = distance / speed
@@ -3847,7 +3847,7 @@ if World3 then
                         tween.Completed:Wait()
 
                         repeat
-                            hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+                            hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
                             task.wait()
                         until not _G.Kill_Cake 
                             or not boss.Parent 
@@ -3864,7 +3864,7 @@ if World3 then
                         end
                     end
 
-                    task.wait(1)
+                    task.wait(0.5)
                 end
             end)
         end, 
@@ -4658,8 +4658,8 @@ Setting:AddTextBox({
 Setting:AddTextBox({
     Title = "Tween Speed",
     Description = "tốc độ tween",
-    PlaceHolder = "350",
-    Default = "350",
+    PlaceHolder = "370",
+    Default = "370",
     Callback = function(I)
         if tonumber(I) then
             getgenv().TweenSpeedFar = tonumber(I)
