@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 6",
+    SubTitle = "UI V2 | Test 7",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -2491,12 +2491,12 @@ local Event = Library:MakeTab({
 })
 
 local Race = Library:MakeTab({
-    Title = "Race Upgrade",
+    Title = "Upgrade V4",
     Icon = "rbxassetid://115164375298022"
 })
 
 local Dojo = Library:MakeTab({
-    Title = "Dojo Quest & Drago Race",
+    Title = "Dojo & Drago Race",
     Icon = "rbxassetid://91920478152016"
 })
 
