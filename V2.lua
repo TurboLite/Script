@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 8",
+    SubTitle = "UI V2 | Test 9",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -3804,7 +3804,7 @@ if World3 then
 		local enemies = workspace:WaitForChild("Enemies")
 
 		local PortalEntrance = CFrame.new(-2151.82, 149.32, -12404.91)
-		local speed = 350
+		local speed = 360
 
 		local function tweenTo(cf)
 			local character = player.Character
@@ -3852,28 +3852,24 @@ if World3 then
 						end
 					end
 
-					-- 🔎 CHECK KHOẢNG CÁCH TỚI CỬA
-					local distanceToPortal = (hrp.Position - PortalEntrance.Position).Magnitude
+					-- 🔥 BƯỚC 1: BAY TỚI CỬA
+					tweenTo(PortalEntrance)
 
-					-- Nếu xa hơn 300 studs mới bay tới cửa
-					if distanceToPortal > 300 then
-						tweenTo(PortalEntrance)
-						task.wait(0.5)
-					end
+					task.wait(0.5)
 
-					-- 🔥 BAY LÊN ĐẦU BOSS
-					local bossCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+					-- 🔥 BƯỚC 2: BAY LÊN ĐẦU BOSS
+					local bossCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
 					tweenTo(bossCFrame)
 
-					-- 🔥 GIỮ TRÊN ĐẦU
+					-- 🔥 BƯỚC 3: GIỮ TRÊN ĐẦU
 					repeat
-						hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+						hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
 						task.wait()
 					until not _G.Kill_Cake
 						or not boss.Parent
 						or boss.Humanoid.Health <= 0
 
-					-- TẮT NOCLIP
+					-- Tắt noclip khi xong
 					if hrp:FindFirstChild("BodyClip") then
 						hrp.BodyClip:Destroy()
 					end
