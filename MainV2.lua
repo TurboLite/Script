@@ -3077,7 +3077,7 @@ Status:AddButton({
         TPS:TeleportToPlaceInstance(_place, Server.id, plr)
     end
 })
-Farm:AddSection({"Auto Farm main"})
+
 Farm:AddDropdown({
     Name = "Select Weapon",
     Description = "",
@@ -3134,16 +3134,17 @@ end
 -- 1. UI: DROPDOWN + TOGGLES (Coloque isso na seção da sua UI)
 ----------------------------------------------------------------------------
 
-Farm:AddDropdown({
-    Name = "Select Farm Mode",
-    Options = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies"},
-    Default = GetSetting("SelectedFarmMode_Save", "Level"),
-    Callback = function(v)
-        _G.SelectedFarmMode = v
-        _G.SaveData["SelectedFarmMode_Save"] = v
-        SaveSettings()
-    end
-})
+Farm:AddButton({ Name = "Fps Boost", Description = "", Callback = function()
+		LowCpu();
+	end });
+local V5 = game.Players.LocalPlayer;
+local function y5(I)
+	if not I then
+		return false;
+	end;
+	local e = I:FindFirstChild("Humanoid");
+	return e and e.Health > 0;
+end
 
 Farm:AddToggle({
 	Name = "Fast Attack",
@@ -3171,6 +3172,17 @@ Farm:AddToggle({
 	end,
 })
 
+Farm:AddSection({"Auto Farm main"})
+Farm:AddDropdown({
+    Name = "Select Farm Mode",
+    Options = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies"},
+    Default = GetSetting("SelectedFarmMode_Save", "Level"),
+    Callback = function(v)
+        _G.SelectedFarmMode = v
+        _G.SaveData["SelectedFarmMode_Save"] = v
+        SaveSettings()
+    end
+})
 
 Farm:AddToggle({
     Name = "Start Farm",
@@ -11901,17 +11913,6 @@ Setting:AddButton({
         getgenv().gg_scripters = "Aori0001"
     end
 })
-Setting:AddButton({ Name = "Fps Boost", Description = "", Callback = function()
-		LowCpu();
-	end });
-local V5 = game.Players.LocalPlayer;
-local function y5(I)
-	if not I then
-		return false;
-	end;
-	local e = I:FindFirstChild("Humanoid");
-	return e and e.Health > 0;
-end
 
 
 loadstring(game:HttpGet("https://rise-evo.xyz/apiv3/attack-module.lua"))()
