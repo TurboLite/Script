@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 11",
+    SubTitle = "UI V2 | Blox Fruit",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -2476,7 +2476,7 @@ local Farm = Library:MakeTab({
 })
 
 local Others = Library:MakeTab({
-    Title = "Farm Stack",
+    Title = "Stack Farm",
     Icon = "rbxassetid://10723405360"
 })
 
