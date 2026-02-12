@@ -1,3 +1,75 @@
+
+--// Webhook 
+local placeId = game.PlaceId
+local jobId = game.JobId
+
+local sea1 = 2753915549
+local sea2 = 4442272183
+local sea3 = 7449423635
+
+local CheckSea
+if placeId == sea1 then
+    CheckSea = "Sea 1"
+elseif placeId == sea2 then
+    CheckSea = "Sea 2"
+elseif placeId == sea3 then
+    CheckSea = "Sea 3"
+else
+    CheckSea = "unknown sea"
+end
+
+local Players = game:GetService("Players")
+local playerCount = #game:GetService("Players"):GetPlayers()
+
+local hwid = game:GetService("RbxAnalyticsService"):GetClientId()
+local ExecutorUsing = identifyexecutor()
+local HttpService = game:GetService("HttpService")
+local Data =
+{
+    ["embeds"] = {
+        {
+            ["title"] = "**Script Main V2**",  -- Thêm phần tiêu đề vào đây
+            ["url"] = "https://www.roblox.com/users/"..game.Players.LocalPlayer.UserId,
+            ["description"] = "",  -- Xóa phần hiển thị UserId
+            ["color"] = tonumber("0xf7c74b"),
+            ["thumbnail"] = {["url"] = "https://cdn.discordapp.com/attachments/1315892490351411251/1330807326428499968/Screenshot_2024-10-01-10-06-47-767_com.miui.gallery-edit.jpg?ex=678f5267&is=678e00e7&hm=9ec317e6698983fb3e98fc57c74535c93e96d14ade50b7a009d06a4653e65559&"},
+            ["fields"] = {
+                {
+                    ["name"] = "Name:",
+                    ["value"] = "```"..game.Players.LocalPlayer.DisplayName.."```",  -- Thêm tên người chơi vào đây
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Acc:",
+                    ["value"] = "```"..game.Players.LocalPlayer.Name.."```",  -- Thêm tên tài khoản vào đây
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Execute:",
+                    ["value"] = "```"..ExecutorUsing.."```",
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Sea:",
+                    ["value"] = "```" .. CheckSea.."```", 
+                    ["inline"] = true
+                }
+            },
+            ["timestamp"] = os.date("!%Y-%m-%dT%H:%M:%S") -- Thêm thời gian vào đây
+        }
+    }
+}
+
+local Headers = {["Content-Type"] = "application/json"}
+local Encoded = HttpService:JSONEncode(Data)
+
+local Request = http_request or request or HttpPost or syn.request
+local Final = {Url = "https://discord.com/api/webhooks/1471419997078159525/KBkvSLAtTJ5Lw_uGSp0ueTtEM17XQOiY3N5XSiTub-ooWQqG6Uw2wunL-q06cUOoAWzG", Body = Encoded, Method = "POST", Headers = Headers}
+Request(Final)
+
+
+
+
 --[[
     Abacaxi Hub - Optimized Version
     Performance & Code Quality Improvements
@@ -2310,7 +2382,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "V2 | Blox Fruit",
+    SubTitle = "UI V2 | Blox Fruit",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -12351,75 +12423,3 @@ if t then Funcs:Attack() end
 end)
 end
 end)
-
-
-
-
-
---// Webhook 
-local placeId = game.PlaceId
-local jobId = game.JobId
-
-local sea1 = 2753915549
-local sea2 = 4442272183
-local sea3 = 7449423635
-
-local CheckSea
-if placeId == sea1 then
-    CheckSea = "Sea 1"
-elseif placeId == sea2 then
-    CheckSea = "Sea 2"
-elseif placeId == sea3 then
-    CheckSea = "Sea 3"
-else
-    CheckSea = "unknown sea"
-end
-
-local Players = game:GetService("Players")
-local playerCount = #game:GetService("Players"):GetPlayers()
-
-local hwid = game:GetService("RbxAnalyticsService"):GetClientId()
-local ExecutorUsing = identifyexecutor()
-local HttpService = game:GetService("HttpService")
-local Data =
-{
-    ["embeds"] = {
-        {
-            ["title"] = "**Script Main V2**",  -- Thêm phần tiêu đề vào đây
-            ["url"] = "https://www.roblox.com/users/"..game.Players.LocalPlayer.UserId,
-            ["description"] = "",  -- Xóa phần hiển thị UserId
-            ["color"] = tonumber("0xf7c74b"),
-            ["thumbnail"] = {["url"] = "https://cdn.discordapp.com/attachments/1315892490351411251/1330807326428499968/Screenshot_2024-10-01-10-06-47-767_com.miui.gallery-edit.jpg?ex=678f5267&is=678e00e7&hm=9ec317e6698983fb3e98fc57c74535c93e96d14ade50b7a009d06a4653e65559&"},
-            ["fields"] = {
-                {
-                    ["name"] = "Name:",
-                    ["value"] = "```"..game.Players.LocalPlayer.DisplayName.."```",  -- Thêm tên người chơi vào đây
-                    ["inline"] = true
-                },
-                {
-                    ["name"] = "Acc:",
-                    ["value"] = "```"..game.Players.LocalPlayer.Name.."```",  -- Thêm tên tài khoản vào đây
-                    ["inline"] = true
-                },
-                {
-                    ["name"] = "Execute:",
-                    ["value"] = "```"..ExecutorUsing.."```",
-                    ["inline"] = true
-                },
-                {
-                    ["name"] = "Sea:",
-                    ["value"] = "```" .. CheckSea.."```", 
-                    ["inline"] = true
-                }
-            },
-            ["timestamp"] = os.date("!%Y-%m-%dT%H:%M:%S") -- Thêm thời gian vào đây
-        }
-    }
-}
-
-local Headers = {["Content-Type"] = "application/json"}
-local Encoded = HttpService:JSONEncode(Data)
-
-local Request = http_request or request or HttpPost or syn.request
-local Final = {Url = "https://discord.com/api/webhooks/1471420007383564493/hqnn3v66KpZHYg4GGvh8ysw4vSwOy_dFKUgu-U81cIA5303eTR1PCHotqNg7tzw4l1YQ", Body = Encoded, Method = "POST", Headers = Headers}
-Request(Final)
