@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 7",
+    SubTitle = "UI V2 | Test 8",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -3799,76 +3799,97 @@ if World3 then
             SaveSettings()
 
             local TweenService = game:GetService("TweenService")
-            local Players = game:GetService("Players")
-            local player = Players.LocalPlayer
-            local enemies = workspace:WaitForChild("Enemies")
+		local Players = game:GetService("Players")
+		local player = Players.LocalPlayer
+		local enemies = workspace:WaitForChild("Enemies")
 
-            task.spawn(function()
-                while _G.Kill_Cake do
-                    local character = player.Character
-                    if not character then break end
+		local PortalEntrance = CFrame.new(-2151.82, 149.32, -12404.91)
+		local speed = 350
 
-                    local hrp = character:FindFirstChild("HumanoidRootPart")
-                    if not hrp then break end
+		local function tweenTo(cf)
+			local character = player.Character
+			if not character then return end
+			local hrp = character:FindFirstChild("HumanoidRootPart")
+			if not hrp then return end
 
-                    local boss = enemies:FindFirstChild("Cake Prince") 
-                               or enemies:FindFirstChild("Dough King")
+			local distance = (hrp.Position - cf.Position).Magnitude
+			local time = distance / speed
 
-                    if boss and boss:FindFirstChild("HumanoidRootPart") and boss:FindFirstChild("Humanoid") then
+			local tween = TweenService:Create(
+				hrp,
+				TweenInfo.new(time, Enum.EasingStyle.Linear),
+				{CFrame = cf}
+			)
 
-                        -- NOCLIP
-                        if not hrp:FindFirstChild("BodyClip") then
-                            local Noclip = Instance.new("BodyVelocity")
-                            Noclip.Name = "BodyClip"
-                            Noclip.Parent = hrp
-                            Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                            Noclip.Velocity = Vector3.new(0,0,0)
-                        end
+			tween:Play()
+			tween.Completed:Wait()
+		end
 
-                        for _, v in pairs(character:GetDescendants()) do
-                            if v:IsA("BasePart") then
-                                v.CanCollide = false
-                            end
-                        end
+		task.spawn(function()
+			while _G.Kill_Cake do
+				local character = player.Character
+				if not character then break end
+				local hrp = character:FindFirstChild("HumanoidRootPart")
+				if not hrp then break end
 
-                        -- TWEEN
-                        local targetCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
-                        local distance = (hrp.Position - targetCFrame.Position).Magnitude
-                        local speed = 350
-                        local time = distance / speed
+				local boss = enemies:FindFirstChild("Cake Prince") 
+				          or enemies:FindFirstChild("Dough King")
 
-                        local tween = TweenService:Create(
-                            hrp,
-                            TweenInfo.new(time, Enum.EasingStyle.Linear),
-                            {CFrame = targetCFrame}
-                        )
+				if boss and boss:FindFirstChild("HumanoidRootPart") and boss:FindFirstChild("Humanoid") then
 
-                        tween:Play()
-                        tween.Completed:Wait()
+					-- ===== NOCLIP =====
+					if not hrp:FindFirstChild("BodyClip") then
+						local Noclip = Instance.new("BodyVelocity")
+						Noclip.Name = "BodyClip"
+						Noclip.Parent = hrp
+						Noclip.MaxForce = Vector3.new(100000,100000,100000)
+						Noclip.Velocity = Vector3.new(0,0,0)
+					end
 
-                        repeat
-                            hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
-                            task.wait()
-                        until not _G.Kill_Cake 
-                            or not boss.Parent 
-                            or boss.Humanoid.Health <= 0
+					for _, v in pairs(character:GetDescendants()) do
+						if v:IsA("BasePart") then
+							v.CanCollide = false
+						end
+					end
 
-                        if hrp:FindFirstChild("BodyClip") then
-                            hrp.BodyClip:Destroy()
-                        end
+					-- 🔎 CHECK KHOẢNG CÁCH TỚI CỬA
+					local distanceToPortal = (hrp.Position - PortalEntrance.Position).Magnitude
 
-                        for _, v in pairs(character:GetDescendants()) do
-                            if v:IsA("BasePart") then
-                                v.CanCollide = true
-                            end
-                        end
-                    end
+					-- Nếu xa hơn 300 studs mới bay tới cửa
+					if distanceToPortal > 300 then
+						tweenTo(PortalEntrance)
+						task.wait(0.5)
+					end
 
-                    task.wait(0.5)
-                end
-            end)
-        end, 
-    }) 
+					-- 🔥 BAY LÊN ĐẦU BOSS
+					local bossCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+					tweenTo(bossCFrame)
+
+					-- 🔥 GIỮ TRÊN ĐẦU
+					repeat
+						hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+						task.wait()
+					until not _G.Kill_Cake
+						or not boss.Parent
+						or boss.Humanoid.Health <= 0
+
+					-- TẮT NOCLIP
+					if hrp:FindFirstChild("BodyClip") then
+						hrp.BodyClip:Destroy()
+					end
+
+					for _, v in pairs(character:GetDescendants()) do
+						if v:IsA("BasePart") then
+							v.CanCollide = true
+						end
+					end
+				end
+
+				task.wait(1)
+			end
+		end)
+	end,
+})
 
 end 
 
