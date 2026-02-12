@@ -3719,14 +3719,27 @@ spawn(function()
     end
 end)
 
-local TweenService = game:GetService("TweenService")
+Farm:AddSection({"Other"})
+
+if World3 then
+Farm:AddToggle({
+	Name = "Auto Kill Boss Cake",
+	Description = "tự động đánh boss cake prince và dough king",
+	Default = GetSetting("KillCake_Save", true),
+
+	Callback = function(I)
+		_G.Kill_Cake = I
+		_G.SaveData["KillCake_Save"] = I
+		SaveSettings()
+
+		local TweenService = game:GetService("TweenService")
 		local Players = game:GetService("Players")
 		local player = Players.LocalPlayer
 		local enemies = workspace:WaitForChild("Enemies")
 
 		task.spawn(function()
 
-			while _G.AutoFarm_Cake do
+			while _G.Kill_Cake do
 				local character = player.Character
 				if not character then break end
 
@@ -3774,7 +3787,7 @@ local TweenService = game:GetService("TweenService")
 					repeat
 						hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
 						task.wait()
-					until not _G.AutoFarm_Cake 
+					until not _G.Kill_Cake 
 						or not boss.Parent 
 						or boss.Humanoid.Health <= 0
 
@@ -3795,10 +3808,6 @@ local TweenService = game:GetService("TweenService")
 		end)
 	end,
 })
-
-Farm:AddSection({"Other"})
-
-		
 -- Configuração da Distância Máxima (em studs)
 -- Aumente se quiser pegar mobs um pouco mais longe, diminua se quiser bem perto.
 _G.MaxFarmDistance = 325
