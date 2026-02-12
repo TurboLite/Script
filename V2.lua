@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 5",
+    SubTitle = "UI V2 | Test 6",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -2476,13 +2476,8 @@ local Farm = Library:MakeTab({
 })
 
 local Others = Library:MakeTab({
-    Title = "Farm Others",
+    Title = "Farm Stack",
     Icon = "rbxassetid://10723405360"
-})
-
-local Shop = Library:MakeTab({
-    Title = "Local Shop",
-    Icon = "rbxassetid://6031265976"
 })
 
 local Maestry = Library:MakeTab({
@@ -2505,23 +2500,8 @@ local Dojo = Library:MakeTab({
     Icon = "rbxassetid://91920478152016"
 })
 
-local Esp = Library:MakeTab({
-    Title = "Stats & ESP",
-    Icon = "rbxassetid://11155851001"
-})
-
-local Player = Library:MakeTab({
-    Title = "Local Player",
-    Icon = "rbxassetid://13075651575"
-})
-
-local Teleport = Library:MakeTab({
-    Title = "Tab Teleport",
-    Icon = "rbxassetid://10734886004"
-})
-
 local Get = Library:MakeTab({
-    Title = "Get Items & Upgrade",
+    Title = "Get Item & Upgrade",
     Icon = "rbxassetid://13075622619"
 })
 
@@ -2530,8 +2510,28 @@ local Fruit = Library:MakeTab({
     Icon = "rbxassetid://11155986081"
 })
 
+local Player = Library:MakeTab({
+    Title = "Local Player",
+    Icon = "rbxassetid://13075651575"
+})
+
+local Shop = Library:MakeTab({
+    Title = "Local Shop",
+    Icon = "rbxassetid://6031265976"
+})
+
+local Esp = Library:MakeTab({
+    Title = "Stats & ESP",
+    Icon = "rbxassetid://11155851001"
+})
+
+local Teleport = Library:MakeTab({
+    Title = "Tab Teleport",
+    Icon = "rbxassetid://10734886004"
+})
+
 local Setting = Library:MakeTab({
-    Title = "Settings & Misc",
+    Title = "Setting & UI",
     Icon = "rbxassetid://7734053495"
 })
 Status:AddDiscordInvite({
