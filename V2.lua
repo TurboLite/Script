@@ -753,7 +753,7 @@ BringEnemy = function()
             local dist = (root.Position - targetPos).Magnitude  
 
             if dist <= _G.BringRange and not root:GetAttribute("Tweening") then  
-                count += 2  
+                count += 5  
                 root:SetAttribute("Tweening", true)  
 
                 local tween = TweenService:Create(  
@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test",
+    SubTitle = "UI V2 | Test 2",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
