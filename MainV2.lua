@@ -3137,7 +3137,7 @@ end
 -- 1. UI: DROPDOWN + TOGGLES (Coloque isso na seção da sua UI)
 ----------------------------------------------------------------------------
 Farm:AddToggle({
-	Name = "Fast Attack",
+	Name = "Super Attack",
 	Description = "",
 	-- 1. Carrega o estado salvo ou inicia como true (padrão original)
 	Default = GetSetting("AutoAttack_Save", true),
@@ -3174,7 +3174,7 @@ Farm:AddToggle({
 	end,
 })
 
-Farm:AddSection({"Auto Farm Main"})
+Farm:AddSection({"Auto Farm"})
 Farm:AddDropdown({
     Name = "Select Farm Mode",
     Options = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies"},
@@ -3210,6 +3210,16 @@ Farm:AddToggle({
             end  
         end
 
+        _G.SaveData["StartFarm_Save"] = v
+        SaveSettings()
+    end
+})
+
+Farm:AddToggle({
+    Title = "Auto Bone",
+    Default = GetSetting("StartFarm_Save", false),
+    Callback = function(v)
+        _G.AutoFarm_Bone = v
         _G.SaveData["StartFarm_Save"] = v
         SaveSettings()
     end
