@@ -656,7 +656,7 @@ _B = false
 PosMon = nil
 
 _G.BringRange = _G.BringRange or 250
-_G.MaxBringMobs = _G.MaxBringMobs or 10 -- LIMITE DE MOBS
+_G.MaxBringMobs = _G.MaxBringMobs or 15 -- LIMITE DE MOBS
 
 _G.FarmPriorityElf = _G.FarmPriorityElf or false
 _G.FarmMastery_S   = _G.FarmMastery_S or false
@@ -753,7 +753,7 @@ BringEnemy = function()
             local dist = (root.Position - targetPos).Magnitude  
 
             if dist <= _G.BringRange and not root:GetAttribute("Tweening") then  
-                count += 5  
+                count += 10  
                 root:SetAttribute("Tweening", true)  
 
                 local tween = TweenService:Create(  
@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 2",
+    SubTitle = "UI V2 | Test 3",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
