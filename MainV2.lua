@@ -2395,7 +2395,7 @@ imageButton.MouseButton1Click:Connect(function()
 end)
 
 local Status = Library:MakeTab({
-    Title = "Status & Server",
+    Title = "Info & Server",
     Icon = "rbxassetid://7040410130"
 })
 
