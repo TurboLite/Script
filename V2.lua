@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 9",
+    SubTitle = "UI V2 | Test 10",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -3798,93 +3798,106 @@ if World3 then
             _G.SaveData["KillCake_Save"] = I
             SaveSettings()
 
-            local TweenService = game:GetService("TweenService")
-		local Players = game:GetService("Players")
-		local player = Players.LocalPlayer
-		local enemies = workspace:WaitForChild("Enemies")
+Farm:AddToggle({
+    Name = "Auto Kill Boss Cake",
+    Description = "tự động đánh boss cake prince và dough king",
+    Default = GetSetting("KillCake_Save", false),
 
-		local PortalEntrance = CFrame.new(-2151.82, 149.32, -12404.91)
-		local speed = 360
+    Callback = function(I)
+        _G.Kill_Cake = I
+        _G.SaveData["KillCake_Save"] = I
+        SaveSettings()
 
-		local function tweenTo(cf)
-			local character = player.Character
-			if not character then return end
-			local hrp = character:FindFirstChild("HumanoidRootPart")
-			if not hrp then return end
+        local TweenService = game:GetService("TweenService")
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+        local enemies = workspace:WaitForChild("Enemies")
 
-			local distance = (hrp.Position - cf.Position).Magnitude
-			local time = distance / speed
+        local speed = 360
+        local CurrentTween
 
-			local tween = TweenService:Create(
-				hrp,
-				TweenInfo.new(time, Enum.EasingStyle.Linear),
-				{CFrame = cf}
-			)
+        local function tweenTo(cf)
+            local character = player.Character
+            if not character then return end
+            local hrp = character:FindFirstChild("HumanoidRootPart")
+            if not hrp then return end
 
-			tween:Play()
-			tween.Completed:Wait()
-		end
+            local distance = (hrp.Position - cf.Position).Magnitude
+            local time = distance / speed
 
-		task.spawn(function()
-			while _G.Kill_Cake do
-				local character = player.Character
-				if not character then break end
-				local hrp = character:FindFirstChild("HumanoidRootPart")
-				if not hrp then break end
+            CurrentTween = TweenService:Create(
+                hrp,
+                TweenInfo.new(time, Enum.EasingStyle.Linear),
+                {CFrame = cf}
+            )
 
-				local boss = enemies:FindFirstChild("Cake Prince") 
-				          or enemies:FindFirstChild("Dough King")
+            CurrentTween:Play()
+            CurrentTween.Completed:Wait()
+        end
 
-				if boss and boss:FindFirstChild("HumanoidRootPart") and boss:FindFirstChild("Humanoid") then
+        task.spawn(function()
+            while _G.Kill_Cake do
+                task.wait()
 
-					-- ===== NOCLIP =====
-					if not hrp:FindFirstChild("BodyClip") then
-						local Noclip = Instance.new("BodyVelocity")
-						Noclip.Name = "BodyClip"
-						Noclip.Parent = hrp
-						Noclip.MaxForce = Vector3.new(100000,100000,100000)
-						Noclip.Velocity = Vector3.new(0,0,0)
-					end
+                local character = player.Character
+                if not character then break end
+                local hrp = character:FindFirstChild("HumanoidRootPart")
+                if not hrp then break end
 
-					for _, v in pairs(character:GetDescendants()) do
-						if v:IsA("BasePart") then
-							v.CanCollide = false
-						end
-					end
+                local boss = enemies:FindFirstChild("Cake Prince") 
+                          or enemies:FindFirstChild("Dough King")
 
-					-- 🔥 BƯỚC 1: BAY TỚI CỬA
-					tweenTo(PortalEntrance)
+                if boss and boss:FindFirstChild("HumanoidRootPart") and boss:FindFirstChild("Humanoid") then
 
-					task.wait(0.5)
+                    -- ===== NOCLIP =====
+                    if not hrp:FindFirstChild("BodyClip") then
+                        local Noclip = Instance.new("BodyVelocity")
+                        Noclip.Name = "BodyClip"
+                        Noclip.Parent = hrp
+                        Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                        Noclip.Velocity = Vector3.new(0,0,0)
+                    end
 
-					-- 🔥 BƯỚC 2: BAY LÊN ĐẦU BOSS
-					local bossCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
-					tweenTo(bossCFrame)
+                    for _, v in pairs(character:GetDescendants()) do
+                        if v:IsA("BasePart") then
+                            v.CanCollide = false
+                        end
+                    end
 
-					-- 🔥 BƯỚC 3: GIỮ TRÊN ĐẦU
-					repeat
-						hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
-						task.wait()
-					until not _G.Kill_Cake
-						or not boss.Parent
-						or boss.Humanoid.Health <= 0
+                    -- 🔥 BAY THẲNG TỚI BOSS
+                    local bossCF = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
+                    tweenTo(bossCF)
 
-					-- Tắt noclip khi xong
-					if hrp:FindFirstChild("BodyClip") then
-						hrp.BodyClip:Destroy()
-					end
+                    -- 🔥 GIỮ TRÊN ĐẦU BOSS
+                    while _G.Kill_Cake 
+                        and boss.Parent 
+                        and boss.Humanoid.Health > 0 do
 
-					for _, v in pairs(character:GetDescendants()) do
-						if v:IsA("BasePart") then
-							v.CanCollide = true
-						end
-					end
-				end
+                        hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
+                        task.wait()
+                    end
 
-				task.wait(1)
-			end
-		end)
-	end,
+                    -- Dọn dẹp khi xong hoặc tắt toggle
+                    if hrp:FindFirstChild("BodyClip") then
+                        hrp.BodyClip:Destroy()
+                    end
+
+                    for _, v in pairs(character:GetDescendants()) do
+                        if v:IsA("BasePart") then
+                            v.CanCollide = true
+                        end
+                    end
+                end
+            end
+
+            -- 🔴 Khi toggle tắt → huỷ tween ngay
+            if CurrentTween then
+                pcall(function()
+                    CurrentTween:Cancel()
+                end)
+            end
+        end)
+    end,
 })
 
 end 
