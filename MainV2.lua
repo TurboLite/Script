@@ -3774,7 +3774,7 @@ local TweenService = game:GetService("TweenService")
 					repeat
 						hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
 						task.wait()
-					until not _G.Kill_Cake 
+					until not _G.AutoFarm_Cake 
 						or not boss.Parent 
 						or boss.Humanoid.Health <= 0
 
