@@ -2381,7 +2381,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "UI V2 | Test 10",
+    SubTitle = "UI V2 | Test 11",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -3727,7 +3727,7 @@ spawn(function()
                 local portalOpen = other and other.Transparency == 0  
                 local boss = enemies:FindFirstChild("Cake Prince") or enemies:FindFirstChild("Dough King")  
 
-                if not boss and not portalOpen and (hrp.Position - CakePos.Position).Magnitude > 3000 then  
+                if not boss and not portalOpen and (hrp.Position - CakePos.Position).Magnitude > 300000 then  
                     _tp(CakePos) 
                     return  
                 end  
@@ -3741,7 +3741,7 @@ spawn(function()
                         G.Kill(boss, true)  
                         return  
                     end  
-                    if (hrp.Position - PortalEntrance.Position).Magnitude < 500 then  
+                    if (hrp.Position - PortalEntrance.Position).Magnitude < 500000 then  
                         TeleportConditional(hrp, PortalEntrance, TELEPORT_DISTANCE_THRESHOLD)  
                     end  
                     return  
@@ -3783,113 +3783,6 @@ end)
 
 
 Farm:AddSection({"Other"})
-
-local World3 = game.PlaceId == 7449423635
-
-if World3 then
-Farm:AddToggle({
-    Name = "Auto Kill Boss Cake",
-    Description = "tự động đánh boss cake prince và dough king",
-    Default = GetSetting("KillCake_Save", false),
-
-    Callback = function(I)
-        _G.Kill_Cake = I
-        _G.SaveData["KillCake_Save"] = I
-        SaveSettings()
-
-        local TweenService = game:GetService("TweenService")
-        local Players = game:GetService("Players")
-        local player = Players.LocalPlayer
-        local enemies = workspace:WaitForChild("Enemies")
-
-        local speed = 360
-        local CurrentTween
-
-        local function tweenTo(cf)
-            local character = player.Character
-            if not character then return end
-            local hrp = character:FindFirstChild("HumanoidRootPart")
-            if not hrp then return end
-
-            local distance = (hrp.Position - cf.Position).Magnitude
-            local time = distance / speed
-
-            CurrentTween = TweenService:Create(
-                hrp,
-                TweenInfo.new(time, Enum.EasingStyle.Linear),
-                {CFrame = cf}
-            )
-
-            CurrentTween:Play()
-            CurrentTween.Completed:Wait()
-        end
-
-        task.spawn(function()
-            while _G.Kill_Cake do
-                task.wait()
-
-                local character = player.Character
-                if not character then break end
-                local hrp = character:FindFirstChild("HumanoidRootPart")
-                if not hrp then break end
-
-                local boss = enemies:FindFirstChild("Cake Prince") 
-                          or enemies:FindFirstChild("Dough King")
-
-                if boss and boss:FindFirstChild("HumanoidRootPart") and boss:FindFirstChild("Humanoid") then
-
-                    -- ===== NOCLIP =====
-                    if not hrp:FindFirstChild("BodyClip") then
-                        local Noclip = Instance.new("BodyVelocity")
-                        Noclip.Name = "BodyClip"
-                        Noclip.Parent = hrp
-                        Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                        Noclip.Velocity = Vector3.new(0,0,0)
-                    end
-
-                    for _, v in pairs(character:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            v.CanCollide = false
-                        end
-                    end
-
-                    -- 🔥 BAY THẲNG TỚI BOSS
-                    local bossCF = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
-                    tweenTo(bossCF)
-
-                    -- 🔥 GIỮ TRÊN ĐẦU BOSS
-                    while _G.Kill_Cake 
-                        and boss.Parent 
-                        and boss.Humanoid.Health > 0 do
-
-                        hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
-                        task.wait()
-                    end
-
-                    -- Dọn dẹp khi xong hoặc tắt toggle
-                    if hrp:FindFirstChild("BodyClip") then
-                        hrp.BodyClip:Destroy()
-                    end
-
-                    for _, v in pairs(character:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            v.CanCollide = true
-                        end
-                    end
-                end
-            end
-
-            -- 🔴 Khi toggle tắt → huỷ tween ngay
-            if CurrentTween then
-                pcall(function()
-                    CurrentTween:Cancel()
-                end)
-            end
-        end)
-    end,
-})
-
-end 
 
 -- Configuração da Distância Máxima (em studs)
 -- Aumente se quiser pegar mobs um pouco mais longe, diminua se quiser bem perto.
