@@ -4017,97 +4017,6 @@ spawn(function()
     end
 end)
 end
-
-Farm:AddToggle({
-    Name = "Auto Kill Rip Indra",
-    Description = "",
-    -- 1. Carrega se estava ligado ou não
-    Default = GetSetting("AutoRipIndra_Save", false),
-    Callback = function(I)
-        _G.AutoRipIngay = I
-        
-        -- 2. Salva na tabela
-        _G.SaveData["AutoRipIndra_Save"] = I
-        
-        -- 3. Grava no arquivo Settings.json
-        SaveSettings()
-    end,
-})
-
-spawn(function()
-	while wait(Sec) do
-		pcall(function()
-			if _G.AutoRipIngay then
-				local I = GetConnectionEnemies("rip_indra");
-				if not GetWP("Dark Dagger") or not GetIn("Valkyrie") and I then
-					repeat
-						wait();
-						G.Kill(I, _G.AutoRipIngay);
-					until not _G.AutoRipIngay or not I.Parent or I.Humanoid.Health <= 0;
-				else
-					replicated.Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-5097.93164, 316.447021, -3142.66602, -0.405007899, -4.31682743e-08, .914313197, -1.90943332e-08, 1, 3.8755779e-08, -0.914313197, -1.76180437e-09, -0.405007899));
-					wait(.1);
-					_tp(CFrame.new(-5344.822265625, 423.98541259766, -2725.0930175781));
-				end;
-			end;
-		end);
-	end;
-end);
-Farm:AddToggle({
-    Name = "Auto Active Cores",
-    Description = "",
-    -- 1. Carrega o estado salvo ou false por padrão
-    Default = GetSetting("AutoActiveCores_Save", false),
-    Callback = function(I)
-        _G.AutoUnHaki = I
-        
-        -- 2. Guarda na tabela de salvamento
-        _G.SaveData["AutoActiveCores_Save"] = I
-        
-        -- 3. Salva no arquivo Settings.json
-        SaveSettings()
-    end,
-})
-
-AuraSkin = function(I)
-		local e = { [1] = { StorageName = I, Type = "AuraSkin", Context = "Equip" } };
-		(((replicated:WaitForChild("Modules")):WaitForChild("Net")):WaitForChild("RF/FruitCustomizerRF")):InvokeServer(unpack(e));
-	end;
-VaildColor = function(I)
-		if I and I.BrickColor then
-			return tostring(I.BrickColor) == "Lime green";
-		end;
-	end;
-HakiCalculate = function(I)
-		local e = { ["Really red"] = "Pure Red", Oyster = "Snow White", ["Hot pink"] = "Winter Sky" };
-		if I and I.BrickColor then
-			return e[tostring(I.BrickColor)];
-		end;
-	end;
-spawn(function()
-	while wait(Sec) do
-		if _G.AutoUnHaki then
-			pcall(function()
-				local I = workspace.Map["Boat Castle"]:FindFirstChild("Summoner");
-				if I and I:FindFirstChild("Circle") then
-					for I, e in pairs((I:FindFirstChild("Circle")):GetChildren()) do
-						if e.Name == "Part" then
-							local I = e:FindFirstChild("Part");
-							if VaildColor(I) == false then
-								AuraSkin(HakiCalculate(e));
-								repeat
-									wait();
-									_tp(e.CFrame);
-								until VaildColor(I) == true or not _G.AutoUnHaki;
-							end;
-						end;
-					end;
-				end;
-			end);
-		end;
-	end;
-end);
-end
 Farm:AddSection({"Collect"})
 -- Botão Auto Collect Chest
 Farm:AddToggle({
@@ -4198,67 +4107,6 @@ spawn(function()
         end
     end
 end)
-
-
-if World3 then
-Farm:AddSection({"Bones"})
--- AUTO RANDOM BONES
-Farm:AddToggle({
-    Name = "Auto Random Bone",
-    Default = false,
-    Callback = function(v)
-        _G.Auto_Random_Bone = v
-    end,
-})
-
-spawn(function()
-    while wait(Sec) do
-        if _G.Auto_Random_Bone then
-            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
-        end
-    end
-end)
-
--- AUTO SOUL REAPER
-Farm:AddToggle({
-    Name = "Auto Soul Reaper",
-    Default = false,
-    Callback = function(v)
-        _G.AutoHytHallow = v
-    end,
-})
-
-spawn(function()
-    while wait(Sec) do
-        if _G.AutoHytHallow then
-            pcall(function()
-
-                local mob = GetConnectionEnemies("Soul Reaper")
-
-                if mob then
-                    repeat task.wait()
-                        G.Kill(mob,_G.AutoHytHallow)
-                    until mob.Humanoid.Health <= 0 or not _G.AutoHytHallow
-
-                else
-                    if not GetBP("Hallow Essence") then
-                        repeat task.wait(.1)
-                            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
-                        until not _G.AutoHytHallow or GetBP("Hallow Essence")
-                    else
-                        local pos = CFrame.new(-8932.32,146.83,6062.55)
-                        repeat wait(.1)
-                            _tp(pos)
-                        until not _G.AutoHytHallow or plr.Character.HumanoidRootPart.CFrame == pos
-                        EquipWeapon("Hallow Essence")
-                    end
-                end
-
-            end)
-        end
-    end
-end)
-end
 Farm:AddSection({"Material"})
 -- Dropdown de Selecionar Material
 Farm:AddDropdown({
@@ -4332,6 +4180,157 @@ spawn(function()
 	end;
 end);
 
+if World3 then
+Farm:AddSection({"Bones"})
+-- AUTO RANDOM BONES
+Farm:AddToggle({
+    Name = "Auto Random Bone",
+    Default = false,
+    Callback = function(v)
+        _G.Auto_Random_Bone = v
+    end,
+})
+
+spawn(function()
+    while wait(Sec) do
+        if _G.Auto_Random_Bone then
+            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
+        end
+    end
+end)
+
+-- AUTO SOUL REAPER
+Farm:AddToggle({
+    Name = "Auto Soul Reaper",
+    Default = false,
+    Callback = function(v)
+        _G.AutoHytHallow = v
+    end,
+})
+
+spawn(function()
+    while wait(Sec) do
+        if _G.AutoHytHallow then
+            pcall(function()
+
+                local mob = GetConnectionEnemies("Soul Reaper")
+
+                if mob then
+                    repeat task.wait()
+                        G.Kill(mob,_G.AutoHytHallow)
+                    until mob.Humanoid.Health <= 0 or not _G.AutoHytHallow
+
+                else
+                    if not GetBP("Hallow Essence") then
+                        repeat task.wait(.1)
+                            replicated.Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
+                        until not _G.AutoHytHallow or GetBP("Hallow Essence")
+                    else
+                        local pos = CFrame.new(-8932.32,146.83,6062.55)
+                        repeat wait(.1)
+                            _tp(pos)
+                        until not _G.AutoHytHallow or plr.Character.HumanoidRootPart.CFrame == pos
+                        EquipWeapon("Hallow Essence")
+                    end
+                end
+
+            end)
+        end
+    end
+end)
+end
+if World3 then
+Farm:AddSection({"Dark Dragger + Valkyrie"})
+Farm:AddToggle({
+    Name = "Auto Kill Rip Indra",
+    Description = "",
+    -- 1. Carrega se estava ligado ou não
+    Default = GetSetting("AutoRipIndra_Save", false),
+    Callback = function(I)
+        _G.AutoRipIngay = I
+        
+        -- 2. Salva na tabela
+        _G.SaveData["AutoRipIndra_Save"] = I
+        
+        -- 3. Grava no arquivo Settings.json
+        SaveSettings()
+    end,
+})
+
+spawn(function()
+	while wait(Sec) do
+		pcall(function()
+			if _G.AutoRipIngay then
+				local I = GetConnectionEnemies("rip_indra");
+				if not GetWP("Dark Dagger") or not GetIn("Valkyrie") and I then
+					repeat
+						wait();
+						G.Kill(I, _G.AutoRipIngay);
+					until not _G.AutoRipIngay or not I.Parent or I.Humanoid.Health <= 0;
+				else
+					replicated.Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-5097.93164, 316.447021, -3142.66602, -0.405007899, -4.31682743e-08, .914313197, -1.90943332e-08, 1, 3.8755779e-08, -0.914313197, -1.76180437e-09, -0.405007899));
+					wait(.1);
+					_tp(CFrame.new(-5344.822265625, 423.98541259766, -2725.0930175781));
+				end;
+			end;
+		end);
+	end;
+end);
+Farm:AddToggle({
+    Name = "Auto Active Cores",
+    Description = "",
+    -- 1. Carrega o estado salvo ou false por padrão
+    Default = GetSetting("AutoActiveCores_Save", false),
+    Callback = function(I)
+        _G.AutoUnHaki = I
+        
+        -- 2. Guarda na tabela de salvamento
+        _G.SaveData["AutoActiveCores_Save"] = I
+        
+        -- 3. Salva no arquivo Settings.json
+        SaveSettings()
+    end,
+})
+
+AuraSkin = function(I)
+		local e = { [1] = { StorageName = I, Type = "AuraSkin", Context = "Equip" } };
+		(((replicated:WaitForChild("Modules")):WaitForChild("Net")):WaitForChild("RF/FruitCustomizerRF")):InvokeServer(unpack(e));
+	end;
+VaildColor = function(I)
+		if I and I.BrickColor then
+			return tostring(I.BrickColor) == "Lime green";
+		end;
+	end;
+HakiCalculate = function(I)
+		local e = { ["Really red"] = "Pure Red", Oyster = "Snow White", ["Hot pink"] = "Winter Sky" };
+		if I and I.BrickColor then
+			return e[tostring(I.BrickColor)];
+		end;
+	end;
+spawn(function()
+	while wait(Sec) do
+		if _G.AutoUnHaki then
+			pcall(function()
+				local I = workspace.Map["Boat Castle"]:FindFirstChild("Summoner");
+				if I and I:FindFirstChild("Circle") then
+					for I, e in pairs((I:FindFirstChild("Circle")):GetChildren()) do
+						if e.Name == "Part" then
+							local I = e:FindFirstChild("Part");
+							if VaildColor(I) == false then
+								AuraSkin(HakiCalculate(e));
+								repeat
+									wait();
+									_tp(e.CFrame);
+								until VaildColor(I) == true or not _G.AutoUnHaki;
+							end;
+						end;
+					end;
+				end;
+			end);
+		end;
+	end;
+end);
+end
 Setting:AddSection({"Manual Save"})
 
 Setting:AddButton({
