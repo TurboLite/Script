@@ -12029,7 +12029,7 @@ player.CharacterAdded:Connect(SetupChar)
 Setting:AddToggle({
 	Name = "No Animation",
 	Description = "",
-	Default = GetSetting("NoAni_Save", true),
+	Default = GetSetting("NoAni_Save", false),
 
 	Callback = function(I)
 		_G.NoAni = I
