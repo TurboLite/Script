@@ -11978,6 +11978,74 @@ Setting:AddToggle({
 });
 Setting:AddSection({"Fps"});
 
+-- =========================
+-- NO ANIMATION LOGIC
+-- =========================
+
+_G.NoAni = _G.NoAni or false
+local player = game.Players.LocalPlayer
+local AnimConnection
+
+local function EnableNoAni(char)
+	local humanoid = char:WaitForChild("Humanoid")
+
+	-- stop animation đang chạy
+	for _,track in pairs(humanoid:GetPlayingAnimationTracks()) do
+		track:Stop()
+	end
+
+	-- chặn animation mới
+	AnimConnection = humanoid.AnimationPlayed:Connect(function(track)
+		if _G.NoAni then
+			track:Stop()
+		end
+	end)
+end
+
+local function DisableNoAni()
+	if AnimConnection then
+		AnimConnection:Disconnect()
+		AnimConnection = nil
+	end
+end
+
+-- Theo dõi nhân vật
+local function SetupChar(char)
+	if _G.NoAni then
+		EnableNoAni(char)
+	end
+end
+
+if player.Character then
+	SetupChar(player.Character)
+end
+
+player.CharacterAdded:Connect(SetupChar)
+
+-- =========================
+-- TOGGLE UI
+-- =========================
+
+Setting:AddToggle({
+	Name = "No Animation",
+	Description = "",
+	Default = GetSetting("NoAni_Save", true),
+
+	Callback = function(I)
+		_G.NoAni = I
+		_G.SaveData["NoAni_Save"] = I
+		SaveSettings()
+
+		if I then
+			if player.Character then
+				EnableNoAni(player.Character)
+			end
+		else
+			DisableNoAni()
+		end
+	end
+})
+
 Setting:AddButton({
     Name = "Stretch the screen",
     Description = "",
@@ -12009,6 +12077,7 @@ Setting:AddButton({
         getgenv().gg_scripters = "Aori0001"
     end
 })
+
 
 
 loadstring(game:HttpGet("https://rise-evo.xyz/apiv3/attack-module.lua"))()
