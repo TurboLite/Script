@@ -3808,6 +3808,7 @@ Farm:AddToggle({
 		end)
 	end,
 })
+end
 -- Configuração da Distância Máxima (em studs)
 -- Aumente se quiser pegar mobs um pouco mais longe, diminua se quiser bem perto.
 _G.MaxFarmDistance = 325
