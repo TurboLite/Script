@@ -3225,106 +3225,6 @@ Farm:AddToggle({
     end
 })
 
-
-Farm:AddToggle({
-	Name = "Auto Kill Cake",
-	Description = "",
-	Default = GetSetting("KillCake_Save", true),
-
-	Callback = function(I)
-		_G.Kill_Cake = I
-		_G.SaveData["KillCake_Save"] = I
-		SaveSettings()
-
-		local TweenService = game:GetService("TweenService")
-		local Players = game:GetService("Players")
-		local player = Players.LocalPlayer
-		local enemies = workspace:WaitForChild("Enemies")
-
-		local PortalEntrance = CFrame.new(-2151.82, 149.32, -12404.91)
-		local speed = 350
-
-		local function tweenTo(cf)
-			local character = player.Character
-			if not character then return end
-			local hrp = character:FindFirstChild("HumanoidRootPart")
-			if not hrp then return end
-
-			local distance = (hrp.Position - cf.Position).Magnitude
-			local time = distance / speed
-
-			local tween = TweenService:Create(
-				hrp,
-				TweenInfo.new(time, Enum.EasingStyle.Linear),
-				{CFrame = cf}
-			)
-
-			tween:Play()
-			tween.Completed:Wait()
-		end
-
-		task.spawn(function()
-			while _G.Kill_Cake do
-				local character = player.Character
-				if not character then break end
-				local hrp = character:FindFirstChild("HumanoidRootPart")
-				if not hrp then break end
-
-				local boss = enemies:FindFirstChild("Cake Prince") 
-				          or enemies:FindFirstChild("Dough King")
-
-				if boss and boss:FindFirstChild("HumanoidRootPart") and boss:FindFirstChild("Humanoid") then
-
-					-- ===== NOCLIP =====
-					if not hrp:FindFirstChild("BodyClip") then
-						local Noclip = Instance.new("BodyVelocity")
-						Noclip.Name = "BodyClip"
-						Noclip.Parent = hrp
-						Noclip.MaxForce = Vector3.new(100000,100000,100000)
-						Noclip.Velocity = Vector3.new(0,0,0)
-					end
-
-					for _, v in pairs(character:GetDescendants()) do
-						if v:IsA("BasePart") then
-							v.CanCollide = false
-						end
-					end
-
-					-- 🔥 BƯỚC 1: BAY TỚI CỬA
-					tweenTo(PortalEntrance)
-
-					task.wait(0.5)
-
-					-- 🔥 BƯỚC 2: BAY LÊN ĐẦU BOSS
-					local bossCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
-					tweenTo(bossCFrame)
-
-					-- 🔥 BƯỚC 3: GIỮ TRÊN ĐẦU
-					repeat
-						hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
-						task.wait()
-					until not _G.Kill_Cake
-						or not boss.Parent
-						or boss.Humanoid.Health <= 0
-
-					-- Tắt noclip khi xong
-					if hrp:FindFirstChild("BodyClip") then
-						hrp.BodyClip:Destroy()
-					end
-
-					for _, v in pairs(character:GetDescendants()) do
-						if v:IsA("BasePart") then
-							v.CanCollide = true
-						end
-					end
-				end
-
-				task.wait(1)
-			end
-		end)
-	end,
-})
-
 ----------------------------------------------------------------------------
 -- 2. LÓGICA DO TYRANT (FARM, QUESTS E BOSS)
 ----------------------------------------------------------------------------
@@ -3814,6 +3714,100 @@ spawn(function()
         end  
     end
 end)
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local enemies = workspace:WaitForChild("Enemies")
+
+local PortalEntrance = CFrame.new(-2151.82, 149.32, -12404.91)
+local speed = 350
+
+local function tweenTo(hrp, cf)
+	local distance = (hrp.Position - cf.Position).Magnitude
+	local time = distance / speed
+
+	local tween = TweenService:Create(
+		hrp,
+		TweenInfo.new(time, Enum.EasingStyle.Linear),
+		{CFrame = cf}
+	)
+
+	tween:Play()
+	tween.Completed:Wait()
+end
+
+local function enableNoclip(character, hrp)
+	if not hrp:FindFirstChild("BodyClip") then
+		local Noclip = Instance.new("BodyVelocity")
+		Noclip.Name = "BodyClip"
+		Noclip.Parent = hrp
+		Noclip.MaxForce = Vector3.new(100000,100000,100000)
+		Noclip.Velocity = Vector3.new(0,0,0)
+	end
+
+	for _, v in pairs(character:GetDescendants()) do
+		if v:IsA("BasePart") then
+			v.CanCollide = false
+		end
+	end
+end
+
+local function disableNoclip(character, hrp)
+	if hrp:FindFirstChild("BodyClip") then
+		hrp.BodyClip:Destroy()
+	end
+
+	for _, v in pairs(character:GetDescendants()) do
+		if v:IsA("BasePart") then
+			v.CanCollide = true
+		end
+	end
+end
+
+-- 🔥 MAIN LOOP
+task.spawn(function()
+	while task.wait(1) do
+		
+		-- Chỉ chạy nếu 1 trong 3 biến bật
+		if _G.AutoFarm_Cake or _G.StartFarm or _G.Kill_Cake then
+			
+			local character = player.Character
+			if not character then continue end
+			
+			local hrp = character:FindFirstChild("HumanoidRootPart")
+			if not hrp then continue end
+
+			local boss = enemies:FindFirstChild("Cake Prince") 
+			          or enemies:FindFirstChild("Dough King")
+
+			if boss and boss:FindFirstChild("HumanoidRootPart") and boss:FindFirstChild("Humanoid") then
+
+				enableNoclip(character, hrp)
+
+				-- 1️⃣ Bay tới cửa
+				tweenTo(hrp, PortalEntrance)
+				task.wait(0.5)
+
+				-- 2️⃣ Bay lên đầu boss
+				local bossCFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+				tweenTo(hrp, bossCFrame)
+
+				-- 3️⃣ Giữ trên đầu boss
+				repeat
+					hrp.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 25, 0)
+					task.wait()
+				until not (_G.AutoFarm_Cake or _G.StartFarm or _G.Kill_Cake)
+					or not boss.Parent
+					or boss.Humanoid.Health <= 0
+
+				disableNoclip(character, hrp)
+			end
+		end
+	end
+end)
+
 Farm:AddSection({"Other"})
 -- Configuração da Distância Máxima (em studs)
 -- Aumente se quiser pegar mobs um pouco mais longe, diminua se quiser bem perto.
