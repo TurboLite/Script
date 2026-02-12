@@ -2310,7 +2310,7 @@ QuestNeta = function()
 	end;
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/RedzLib.lua"))():MakeWindow({
     Title = "Turbo Lite Hub",
-    SubTitle = "V2 | Test 2",
+    SubTitle = "V2 | Test 3",
     SaveFolder = "turbolite.json"
 })
 -- Criar ScreenGui
@@ -3721,9 +3721,10 @@ end)
 
 Farm:AddSection({"Other"})
 
+if World3 then
 Farm:AddToggle({
-	Name = "Auto Kill Cake",
-	Description = "",
+	Name = "Auto Kill Boss Cake",
+	Description = "tự động đánh boss cake prince và dough king",
 	Default = GetSetting("KillCake_Save", true),
 
 	Callback = function(I)
