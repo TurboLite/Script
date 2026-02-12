@@ -3083,7 +3083,7 @@ Farm:AddSection({"Local Main"})
 
 Farm:AddDropdown({
     Name = "Select Weapon",
-    Description = "",
+    Description = "chọn vũ khí",
     Options = {"Melee","Sword","Blox Fruit","Gun"},
     Default = "Melee",
     Multi = false,
@@ -3138,7 +3138,7 @@ end
 ----------------------------------------------------------------------------
 Farm:AddToggle({
 	Name = "Super Attack",
-	Description = "",
+	Description = "đánh siêu nhanh",
 	-- 1. Carrega o estado salvo ou inicia como true (padrão original)
 	Default = GetSetting("AutoAttack_Save", true),
 	Callback = function(I)
@@ -3149,7 +3149,7 @@ Farm:AddToggle({
 	end,
 })
 
-Farm:AddButton({ Name = "Fps Boost", Description = "", Callback = function()
+Farm:AddButton({ Name = "Fps Boost", Description = "giảm lag", Callback = function()
 		LowCpu();
 	end });
 local V5 = game.Players.LocalPlayer;
@@ -3163,7 +3163,7 @@ end
 
 Farm:AddToggle({
 	Name = "Bring Mobs",
-	Description = "",
+	Description = "gom quái",
 	-- 1. Carrega o estado salvo ou inicia como true
 	Default = GetSetting("BringMobs_Save", true),
 	Callback = function(I)
@@ -3177,6 +3177,7 @@ Farm:AddToggle({
 Farm:AddSection({"Auto Farm"})
 Farm:AddDropdown({
     Name = "Select Farm Mode",
+    Description = "chọn chế độ farm",
     Options = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies"},
     Default = GetSetting("SelectedFarmMode_Save", "Level"),
     Callback = function(v)
@@ -3188,6 +3189,7 @@ Farm:AddDropdown({
 
 Farm:AddToggle({
     Name = "Start Farm",
+    Description = "bắt đầu farm",
     Default = GetSetting("StartFarm_Save", false),
     Callback = function(v)
         _G.StartFarm = v
