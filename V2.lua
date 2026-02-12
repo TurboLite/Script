@@ -3787,17 +3787,6 @@ Farm:AddSection({"Other"})
 local World3 = game.PlaceId == 7449423635
 
 if World3 then
-
-    Farm:AddToggle({
-        Name = "Auto Kill Boss Cake",
-        Description = "tự động đánh boss cake prince và dough king",
-        Default = GetSetting("KillCake_Save", false),
-
-        Callback = function(I)
-            _G.Kill_Cake = I
-            _G.SaveData["KillCake_Save"] = I
-            SaveSettings()
-
 Farm:AddToggle({
     Name = "Auto Kill Boss Cake",
     Description = "tự động đánh boss cake prince và dough king",
