@@ -2393,10 +2393,6 @@ imageButton.MouseButton1Click:Connect(function()
         Library:Minimize(true)
     end
 end)
-local Discord = Library:MakeTab({
-    Title = "Information",
-    Icon = "rbxassetid://73132811772878"
-})
 
 local Status = Library:MakeTab({
     Title = "Status & Server",
@@ -2467,15 +2463,11 @@ local Setting = Library:MakeTab({
     Title = "Settings & Misc",
     Icon = "rbxassetid://7734053495"
 })
-Discord:AddDiscordInvite({
-    Name = "Turbo Lite Hub",
-    Description = "Join for support and updates",
+Status:AddDiscordInvite({
+    Name = "Server Discord Turbo Lite Hub",
+    Description = "join for support and update <3",
     Logo = "rbxassetid://18919385586",
     Invite = "https://turbolite.xyz/discord"
-})
-local credits = Discord:AddParagraph({
-    Title = "hello, you!",
-    Desc = ""
 })
 
 Shop:AddSection("Fighting Shop")
