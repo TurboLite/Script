@@ -3219,6 +3219,7 @@ Farm:AddToggle({
 
 Farm:AddToggle({
     Title = "Accept Quests",
+    Description = "farm nhận nhiệm vụ",
     Default = GetSetting("AcceptQuest_Save", false),
     Callback = function(v)
         _G.AcceptQuest = v
@@ -3820,7 +3821,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 Farm:AddToggle({
     Name = "Kill Mobs Nearest",
-    Description = "",
+    Description = "Tiêu diệt quái vật gần nhất",
     -- 1. Carrega se estava ligado ou desligado ao abrir o script
     Default = GetSetting("AutoFarmNear_Save", false),
     Callback = function(I)
@@ -3896,7 +3897,7 @@ local Sec = 0.5
 if World2 then
 Farm:AddToggle({
     Name = "Auto Factory Raid",
-    Description = "",
+    Description = "tự động đánh nhà máy",
     -- 1. Tenta carregar se estava ligado ou desligado
     Default = GetSetting("AutoFactory_Save", false),
     Callback = function(Value)
@@ -3945,11 +3946,10 @@ spawn(function()
     end
 end)
 end
-
 if World3 then
 Farm:AddToggle({
     Name = "Auto Pirate Raid",
-    Description = "",
+    Description = "tự động đánh hải tặc",
     -- 1. Carrega se estava ligado ou desligado ao abrir o script
     Default = GetSetting("AutoRaidCastle_Save", false),
     Callback = function(I)
@@ -4024,7 +4024,7 @@ Farm:AddSection({"Collect"})
 -- Botão Auto Collect Chest
 Farm:AddToggle({
     Name = "Auto Collect Chest",
-    Description = "",
+    Description = "tự động nhặt gương",
     -- 1. Carrega o estado salvo (ou false por padrão)
     Default = GetSetting("AutoFarmChest_Save", false),
     Callback = function(I)
@@ -4041,7 +4041,7 @@ Farm:AddToggle({
 -- Botão Auto Collect Berry
 Farm:AddToggle({
 	Name = "Auto Collect Berry",
-	Description = "",
+	Description = "tự động nhặt berry",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoBerry_Save", false),
 	Callback = function(I)
@@ -4114,7 +4114,7 @@ Farm:AddSection({"Material"})
 -- Dropdown de Selecionar Material
 Farm:AddDropdown({
 	Name = "Select Material",
-	Description = "",
+	Description = "chọn nguyên liệu",
 	Options = MaterialList,
 	-- 1. Carrega o material salvo ou deixa vazio se for a primeira vez
 	Default = GetSetting("SelectMaterial_Save", nil),
@@ -4131,7 +4131,7 @@ Farm:AddDropdown({
 -- Toggle de Auto Farm (Material)
 Farm:AddToggle({
 	Name = "Auto Farm",
-	Description = "",
+	Description = "bắt đầu farm",
 	-- 1. Carrega se o farm de material estava ligado
 	Default = GetSetting("AutoMaterial_Save", false),
 	Callback = function(I)
@@ -4188,6 +4188,7 @@ Farm:AddSection({"Bones"})
 -- AUTO RANDOM BONES
 Farm:AddToggle({
     Name = "Auto Random Bone",
+    Description = "tự động đổi xương",
     Default = false,
     Callback = function(v)
         _G.Auto_Random_Bone = v
@@ -4205,6 +4206,7 @@ end)
 -- AUTO SOUL REAPER
 Farm:AddToggle({
     Name = "Auto Soul Reaper",
+    Description = "đổi xương và đánh boss",
     Default = false,
     Callback = function(v)
         _G.AutoHytHallow = v
@@ -4246,7 +4248,7 @@ if World3 then
 Farm:AddSection({"Dark Dragger + Valkyrie"})
 Farm:AddToggle({
     Name = "Auto Kill Rip Indra",
-    Description = "",
+    Description = "tự động đánh rip indra",
     -- 1. Carrega se estava ligado ou não
     Default = GetSetting("AutoRipIndra_Save", false),
     Callback = function(I)
@@ -4281,7 +4283,7 @@ spawn(function()
 end);
 Farm:AddToggle({
     Name = "Auto Active Cores",
-    Description = "",
+    Description = "tự động kích hoạt màu",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoActiveCores_Save", false),
     Callback = function(I)
@@ -4383,7 +4385,7 @@ Setting:AddButton({
 Setting:AddSection({"Setting Farm"})
 Setting:AddButton({
     Name = "Stop Tween",
-    Description = "",
+    Description = "dừng bay tween",
     Callback = function()
         local plr = game.Players.LocalPlayer
         local char = plr.Character
@@ -4429,7 +4431,7 @@ Setting:AddButton({
 
 Setting:AddToggle({
 	Name = "Safe Mode",
-	Description = "turn on for safe ur health if low",
+	Description = "bật lên để bảo vệ máu của bạn nếu mức thấp",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("SafeMode_Save", false),
 	Callback = function(I)
@@ -4442,7 +4444,7 @@ Setting:AddToggle({
 
 Setting:AddToggle({
 	Name = "Auto Active Haki",
-	Description = "",
+	Description = "tự động kích hoạt haki",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoHaki_Save", true),
 	Callback = function(I)
@@ -4466,7 +4468,7 @@ spawn(function()
 end);
 Setting:AddToggle({
 	Name = "Auto Active V3",
-	Description = "",
+	Description = "tự động dùng tộc v3",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoActiveV3_Save", false),
 	Callback = function(I)
@@ -4482,7 +4484,7 @@ Setting:AddToggle({
 
 Setting:AddToggle({
 	Name = "Auto Active V4",
-	Description = "",
+	Description = "tự động dùng tộc v4",
 	-- 1. Carrega o estado salvo
 	Default = GetSetting("AutoActiveV4_Save", false),
 	Callback = function(I)
@@ -4523,7 +4525,7 @@ spawn(function()
 end);
 Setting:AddToggle({
 	Name = "Anti AFK",
-	Description = "",
+	Description = "chống bị kích sau 20p",
 	Default = true,
 	Callback = function(I)
 		_G.AntiAFK = I;
@@ -4536,7 +4538,7 @@ plr.Idled:connect(function()
 end);
 Setting:AddToggle({
 	Name = "Disable Notify",
-	Description = "",
+	Description = "tắt thông báo",
 	-- 1. Carrega o estado salvo ou false por padrão
 	Default = GetSetting("DisableNotify_Save", false),
 	Callback = function(I)
@@ -4566,7 +4568,7 @@ end);
 Setting:AddSection({"Select"})
 Setting:AddTextBox({
     Title = "Bring Mobs Range",
-    Description = "",
+    Description = "độ xa gom quái",
     PlaceHolder = "250",
     Default = tostring(_G.BringRange),
     Callback = function(Value)
@@ -4579,7 +4581,7 @@ Setting:AddTextBox({
 
 Setting:AddTextBox({
     Title = "Select Farm Height",
-    Description = "",
+    Description = "độ cao đứng trên đầu",
     PlaceHolder = "30",
     Default = tostring(_G.MobHeight),
     Callback = function(Value)
@@ -4592,7 +4594,7 @@ Setting:AddTextBox({
 
 Setting:AddTextBox({
     Title = "Tween Speed",
-    Description = "",
+    Description = "tốc độ tween",
     PlaceHolder = "350",
     Default = "350",
     Callback = function(I)
@@ -4715,7 +4717,7 @@ _G.AutoSkillZ = false
 -- 1. SELEÇÃO DE VARA
 Others:AddDropdown({
     Name = "Select Fishing Rod",
-    Description = "",
+    Description = "chọn cần câu cá",
     Options = {
         "Fishing Rod",
         "Gold Rod",
@@ -4737,7 +4739,7 @@ Others:AddDropdown({
 
 Others:AddDropdown({
     Name = "Select Bait",
-    Description = "",
+    Description = "chọn mồi câu",
     Options = {
         "Basic Bait",
         "Kelp Bait",
@@ -4766,7 +4768,7 @@ Others:AddDropdown({
 -- 3. TOGGLE AUTO BUY BAIT
 Others:AddToggle({
     Name = "Auto Buy Bait",
-    Description = "",
+    Description = "tự động mua mồi câu",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoBuyBait", false),
     Callback = function(Value)
@@ -4796,7 +4798,7 @@ end)
 -- 4. TOGGLE AUTO FISHING (CAST/CATCH)
 Others:AddToggle({
     Name = "Auto Fishing",
-    Description = "",
+    Description = "tự động câu cá",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoFishing", false),
     Callback = function(Value)
@@ -4871,7 +4873,7 @@ end)
 -- 5. AUTO QUEST FISHING
 Others:AddToggle({
     Name = "Auto Quest Fishing",
-    Description = "",
+    Description = "tự động nhiệm vụ câu cá",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoQuest", false),
     Callback = function(Value)
@@ -4908,7 +4910,7 @@ end)
 -- 6. AUTO COMPLETE QUEST
 Others:AddToggle({
     Name = "Auto Complete Quest",
-    Description = "",
+    Description = "tự động hoàn thành nhiệm vụ",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoComplete", false),
     Callback = function(Value)
@@ -4938,7 +4940,7 @@ end)
 -- 7. AUTO SELL FISH
 Others:AddToggle({
     Name = "Auto Sell Fish",
-    Description = "",
+    Description = "tự động bán cá",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoSell", false),
     Callback = function(Value)
@@ -4968,7 +4970,7 @@ end)
 -- 8. AUTO SPAM SKILL Z
 Others:AddToggle({
     Name = "Auto use skill of the rod",
-    Description = "",
+    Description = "tự động sử dụng kỹ năng cần câu",
     -- Carrega se estava ligado
     Default = GetSetting("Fish_AutoSkillZ", false),
     Callback = function(Value)
@@ -5057,6 +5059,7 @@ Others:AddSection({"Boss Farm"})
 
 local BossDropdown = Others:AddDropdown({
     Name = "Select Boss",
+    Description = "chọn boss",
     Options = Boss, 
     Default = Boss[1],
     Callback = function(v) _G.FindBoss = v end
@@ -5064,7 +5067,7 @@ local BossDropdown = Others:AddDropdown({
 
 Others:AddButton({
     Name = "Refresh Boss List",
-    Description = "",
+    Description = "làm mới boss",
     Callback = function()
         local LiveBosses = {}  
         local FoundAny = false  
@@ -5097,6 +5100,7 @@ Others:AddButton({
 
 Others:AddToggle({
     Name = "Auto Farm Boss Select",
+    Description = "tự động đánh boss đã chọn",
     Default = false,
     Callback = function(v)
         _G.AutoBoss = v
@@ -5106,6 +5110,7 @@ Others:AddToggle({
 
  Others:AddToggle({
     Name = "Accept Quest Boss",
+    Description = "nhận nhiệm vụ boss",
     Default = false,
     Callback = function(v)
         _G.AutoAcceptQuest = v
@@ -5114,7 +5119,7 @@ Others:AddToggle({
 
  Others:AddToggle({
     Name = "Farm All Bosses",
-    Description = "",
+    Description = "đi đánh tất cả boss đang có",
     Default = false,
     Callback = function(v)
         _G.FarmAllBoss = v
@@ -5235,7 +5240,7 @@ end)
 Others:AddSection({"Quests"})
  Others:AddToggle({
     Name = "Auto Farm Observation",
-    Description = "",
+    Description = "tự động farm haki quan sát",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoObsFarm_Save", false),
     Callback = function(I)
@@ -5323,7 +5328,7 @@ end);
 if World3 then
 Others:AddToggle({
 	Name = "Auto Observation V2",
-	Description = "",
+	Description = "tự động lấy quan sát v2",
 	-- 1. Carrega se estava ligado ou desligado ao abrir o script
 	Default = GetSetting("AutoKenV2_Save", false),
 	Callback = function(I)
@@ -5431,7 +5436,7 @@ spawn(function()
 end);
 Others:AddToggle({
 	Name = "Auto Citizen Quest",
-	Description = "",
+	Description = "nhiệm vụ của công dân",
 	Default = false,
 	Callback = function(I)
 		_G.CitizenQuest = I;
@@ -5495,7 +5500,7 @@ spawn(function()
 end);
 Others:AddToggle({
 	Name = "Auto Elite Quest",
-	Description = "",
+	Description = "làm nhiệm vụ đánh elite",
 	-- 1. Carrega o estado salvo ou false por padrão
 	Default = GetSetting("AutoEliteQuest_Save", false),
 	Callback = function(I)
@@ -5537,7 +5542,7 @@ spawn(function()
 end);
  Others:AddToggle({
     Name = "Stop when got God's Chalice",
-    Description = "",
+    Description = "dừng khi có cúp",
     -- 1. Carrega o estado salvo ou inicia como true (padrão do seu script)
     Default = GetSetting("StopChalice_Save", true),
     Callback = function(I)
@@ -5563,7 +5568,7 @@ spawn(function()
 end);
 Others:AddToggle({
 	Name = "Auto Tushita Sword",
-	Description = "",
+	Description = "tự động lấy kiếm tushita",
 	Default = false,
 	Callback = function(I)
 		_G.Auto_Tushita = I;
@@ -5625,7 +5630,7 @@ end);
 -- AUTO YAMA (EXATAMENTE COMO VOCÊ ENVIou)
  Others:AddToggle({
     Name = "Auto Yama Sword",
-    Description = "",
+    Description = "tự động lấy kiếm yama",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoYama_Save", false),
     Callback = function(I)
@@ -5669,7 +5674,7 @@ Others:AddSection({"Buso/Aura Colours"});
 
  Others:AddToggle({
     Name = "Teleport Barista Haki",
-    Description = "",
+    Description = "di chuyển đến npc haki",
     -- 1. Carrega se estava ligado ou desligado ao abrir o script
     Default = GetSetting("TpBarista_Save", false),
     Callback = function(I)
@@ -5698,7 +5703,7 @@ end);
 
  Others:AddButton({
     Name = "Buy Buso Colors",
-    Description = "",
+    Description = "mua màu buso",
     Callback = function()
         replicated.Remotes.CommF_:InvokeServer("ColorsDealer", "2");
     end
@@ -5707,7 +5712,7 @@ end
 if World3 then
  Others:AddToggle({
     Name = "Auto Rainbow Haki",
-    Description = "",
+    Description = "tự động lấy haki cầu vồng",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("AutoRainbowHaki_Save", false),
     Callback = function(I)
@@ -5809,7 +5814,7 @@ end
 
  Others:AddToggle({
     Name = "Accept Quest Bypass [Risk]",
-    Description = "",
+    Description = "Chấp nhận bỏ qua nhiệm vụ [Rủi ro]",
     -- 1. Carrega se estava ligado ou desligado
     Default = GetSetting("BypassQuest_Save", false),
     Callback = function(I)
@@ -5837,7 +5842,7 @@ local z5 = {
 
     Event:AddDropdown({
         Name = "Select Boats",
-        Description = "",
+        Description = "chọn thuyền đi",
         Options = z5,
         Default = "Guardian",
         Multi = false,
@@ -5852,7 +5857,7 @@ local z5 = {
         };
         Event:AddDropdown({
             Name = "Select Level Sea",
-            Description = "Select danger level to travel",
+            Description = "chọn mức độ để di chuyển trên biển",
             Options = H5,
             Default = "Lv 1",
             Multi = false,
@@ -5864,7 +5869,7 @@ local z5 = {
 
     Event:AddToggle({
         Name = "Auto Start farm",
-        Description = "Auto Buy Boat & Move to Zone",
+        Description = "mua thuyền và chuyển đến khu vực biển",
         Default = false,
         Callback = function(I)
             _G.SailBoats = I;
@@ -5941,7 +5946,7 @@ _G.SetSpeedBoat = 300
 
 Event:AddToggle({
         Name = "Activate Boat Speed",
-        Description = "Enable custom boat speed",
+        Description = "Cho phép tùy chỉnh tốc độ thuyền",
         Default = false,
         Callback = function(Value)
             _G.SpeedBoat = Value
@@ -5950,7 +5955,7 @@ Event:AddToggle({
 
     Event:AddTextBox({
         Title = "Boat Speed Value",
-        Description = "Recommended: 300",
+        Description = "tốc độ thuyền đi, nên dùng 300",
         PlaceHolder = "300",
         Default = "300",
         Callback = function(Value)
@@ -5986,7 +5991,7 @@ end)
 Event:AddSection({"Select what you will farm."})
     Event:AddToggle({
         Name = "Auto Attack Sea Beast",
-        Description = "",
+        Description = "tự động đánh sea beast",
         Default = false,
         Callback = function(I)
             _G.SeaBeast1 = I;
@@ -5994,7 +5999,7 @@ Event:AddSection({"Select what you will farm."})
     });
 Event:AddToggle({
     Name = "Auto Attack Pirate GrandBrigade",
-    Description = "",
+    Description = "tự động tấn công thuyền cướp biển",
     Default = false,
     Callback = function(I)
         _G.PGB = I;
@@ -6010,7 +6015,7 @@ end
 if game.PlaceId == 7449423635 or game.PlaceId == 100117331123089 then
 Event:AddToggle({
     Name = "Auto Shark",
-    Description = "",
+    Description = "đánh cá mập",
     Default = false,
     Callback = function(I)
         _G.Shark = I;
@@ -6018,7 +6023,7 @@ Event:AddToggle({
 });
 Event:AddToggle({
     Name = "Auto Piranha",
-    Description = "",
+    Description = "đánh cá piranha",
     Default = false,
     Callback = function(I)
         _G.Piranha = I;
@@ -6026,7 +6031,7 @@ Event:AddToggle({
 });
 Event:AddToggle({
     Name = "Auto Terror Shark",
-    Description = "",
+    Description = "đánh cá mập khủng bố",
     Default = false,
     Callback = function(I)
         _G.TerrorShark = I;
@@ -6034,7 +6039,7 @@ Event:AddToggle({
 });
 Event:AddToggle({
     Name = "Auto Fish Crew Member",
-    Description = "",
+    Description = "đánh đội đánh cá",
     Default = false,
     Callback = function(I)
         _G.MobCrew = I;
@@ -6042,7 +6047,7 @@ Event:AddToggle({
 });
 Event:AddToggle({
     Name = "Auto Haunted Crew Member",
-    Description = "",
+    Description = "đánh phi hành đoàn bị ma ám",
     Default = false,
     Callback = function(I)
         _G.HCM = I;
@@ -6050,7 +6055,7 @@ Event:AddToggle({
 });
 Event:AddToggle({
     Name = "Auto Attack Fish Boat",
-    Description = "",
+    Description = "đánh thuyền đánh cá",
     Default = false,
     Callback = function(I)
         _G.FishBoat = I;
@@ -6209,14 +6214,14 @@ if game.PlaceId == 7449423635 or game.PlaceId == 100117331123089 then
 Event:AddSection({"Frozen Dimension"})
 Event:AddButton({
 	Name = "Buy Spy",
-	Description = "Buy the spy for finding leviathan",
+	Description = "mua điệp viên để tìm kiếm Leviathan",
 	Callback = function()
 		replicated.Remotes.CommF_:InvokeServer("InfoLeviathan", "2");
 	end
 });
 Event:AddToggle({
     Name = "Teleport Frozen Dimension",
-    Description = "turn on for teleport to frozen dimension and start the leviathan gate",
+    Description = "bật chế độ dịch chuyển đến chiều không gian băng giá và khởi động cổng leviathan.",
     -- 1. Carrega se o teleporte estava ativo
     Default = GetSetting("FrozenTP_Save", false),
     Callback = function(I)
@@ -6243,7 +6248,7 @@ spawn(function()
 end); 
 Event:AddToggle({
 	Name = "Auto Attack Leviathan",
-	Description = "",
+	Description = "đánh leviathan",
 	Default = false,
 	Callback = function(I)
 		_G.Leviathan1 = I;
@@ -6252,7 +6257,7 @@ Event:AddToggle({
 Event:AddSection({"Kitsune Island / Event"});
 Event:AddToggle({
     Name = "Auto Find Kitsune Island",
-    Description = "turn on for finding & tween kitsune island",
+    Description = "bật tính năng tìm kiếm và chuyển động của đảo Kitsune",
     -- 1. Carrega se estava ativado anteriormente
     Default = GetSetting("FindKitsune_Save", false),
     Callback = function(I)
@@ -6303,7 +6308,7 @@ spawn(function()
 end);
 Event:AddToggle({
 	Name = "Auto Teleport to Shrine Actived",
-	Description = "",
+	Description = "dịch chuyển đến Đền thờ đã được kích hoạt",
 	Default = false,
 	Callback = function(I)
 		_G.tweenShrine = I;
@@ -6334,7 +6339,7 @@ spawn(function()
 end);
 Event:AddToggle({
     Name = "Auto Collect Azure Ember",
-    Description = "",
+    Description = "thu thập Azure Ember",
     -- 1. Carrega o estado salvo ou false por padrão
     Default = GetSetting("CollectAzureEmber_Save", false),
     Callback = function(I)
@@ -6363,7 +6368,7 @@ spawn(function()
 end);
 Event:AddToggle({
     Name = "Auto Trade Azure Ember",
-    Description = "",
+    Description = "trao đổi Azure Embe",
     -- 1. Carrega se o trade automático estava ligado
     Default = GetSetting("TradeAzureEmber_Save", false),
     Callback = function(I)
@@ -6396,7 +6401,7 @@ Event:AddButton({ Name = "Talk with kitsune statue", Description = "", Callback 
 	Event:AddSection({"Mystic Island / Full Moon"});
 Event:AddToggle({
 	Name = "Auto Find Mirage Island",
-    Description = "turn on for finding & tween mirage island",
+    Description = "bật tính năng tìm kiếm đảo ảo bí ẩn",
     -- 1. Carrega se estava ligado ou desligado
     Default = GetSetting("FindMirage_Save", false),
     Callback = function(I)
