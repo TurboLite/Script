@@ -3078,6 +3078,9 @@ Status:AddButton({
     end
 })
 
+
+Farm:AddSection({"Local Main"})
+
 Farm:AddDropdown({
     Name = "Select Weapon",
     Description = "",
@@ -3133,6 +3136,18 @@ end
 ----------------------------------------------------------------------------
 -- 1. UI: DROPDOWN + TOGGLES (Coloque isso na seção da sua UI)
 ----------------------------------------------------------------------------
+Farm:AddToggle({
+	Name = "Fast Attack",
+	Description = "",
+	-- 1. Carrega o estado salvo ou inicia como true (padrão original)
+	Default = GetSetting("AutoAttack_Save", true),
+	Callback = function(I)
+		_G.Seriality = I
+        -- 2. Salva
+        _G.SaveData["AutoAttack_Save"] = I
+        SaveSettings()
+	end,
+})
 
 Farm:AddButton({ Name = "Fps Boost", Description = "", Callback = function()
 		LowCpu();
@@ -3147,19 +3162,6 @@ local function y5(I)
 end
 
 Farm:AddToggle({
-	Name = "Fast Attack",
-	Description = "",
-	-- 1. Carrega o estado salvo ou inicia como true (padrão original)
-	Default = GetSetting("AutoAttack_Save", true),
-	Callback = function(I)
-		_G.Seriality = I
-        -- 2. Salva
-        _G.SaveData["AutoAttack_Save"] = I
-        SaveSettings()
-	end,
-})
-
-Farm:AddToggle({
 	Name = "Bring Mobs",
 	Description = "",
 	-- 1. Carrega o estado salvo ou inicia como true
@@ -3172,7 +3174,7 @@ Farm:AddToggle({
 	end,
 })
 
-Farm:AddSection({"Auto Farm main"})
+Farm:AddSection({"Auto Farm Main"})
 Farm:AddDropdown({
     Name = "Select Farm Mode",
     Options = {"Level", "Bone", "Cake Prince", "Tyrant Of The Skies"},
