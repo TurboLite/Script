@@ -3728,7 +3728,7 @@ if World3 then
     Farm:AddToggle({
         Name = "Auto Kill Boss Cake",
         Description = "tự động đánh boss cake prince và dough king",
-        Default = GetSetting("KillCake_Save", true),
+        Default = GetSetting("KillCake_Save", false),
 
         Callback = function(I)
             _G.Kill_Cake = I
@@ -3804,10 +3804,10 @@ if World3 then
                     task.wait(1)
                 end
             end)
-        end, -- đóng Callback
-    }) -- đóng AddToggle
+        end, 
+    }) 
 
-end -- đóng if World3
+end 
 
 -- Configuração da Distância Máxima (em studs)
 -- Aumente se quiser pegar mobs um pouco mais longe, diminua se quiser bem perto.
